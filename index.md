@@ -1,6 +1,6 @@
 # 欢迎来到IVBX Server！ 
 
-##本网页仅用于IVBX的系统发布和资源分享，不作商业用途。
+> 本网页仅用于IVBX的系统发布和资源分享，不作商业用途。
 
 [ IVBX Data B站账号 ](https://space.bilibili.com/1171551865)
 
