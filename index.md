@@ -1,0 +1,7 @@
+# 欢迎来到IVBX Server！ 
+
+这里仅用于IVBX的系统发布和资源分享。
+
+[ IVBX Data B站账号 ](https://space.bilibili.com/1171551865)
+
+[ FireNate / CverNate II 下载](https://www.bilibili.com/read/cv18109258)
