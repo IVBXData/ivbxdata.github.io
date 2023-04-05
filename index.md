@@ -2,8 +2,6 @@
 
 ##本网页仅用于IVBX的系统发布和资源分享，不作商业用途。
 
-![IVBX](https://i0.hdslb.com/bfs/new_dyn/49ec563c1c3ff705a0e667ec0a9d05ed1171551865.png)
-
 [ IVBX Data B站账号 ](https://space.bilibili.com/1171551865)
 
 [ AngelaEnder B站账号 ](https://space.bilibili.com/515586861)
