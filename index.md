@@ -11,3 +11,5 @@
 [ Menhera Vista 47 ](https://www.123pan.com/s/2HYrVv-QshFd.html) 提取码：GFKY
 
 Enjoy！
+
+[简体中文 ](/zh-cn) 
