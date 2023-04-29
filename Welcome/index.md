@@ -3,8 +3,6 @@
 
 <center> You can use the navigation directly on this website or search directly in the address bar. </center>
 
- 
- 
- 
- 
-[Enter the IVBX Server](https://ivbxdata.github.io/en-us/)
+***
+
+<font size=10>[Enter the IVBX Server](https://ivbxdata.github.io/en-us/)</font>
