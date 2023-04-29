@@ -1,0 +1,3 @@
+# 版本 ID
+
+v3.4:KZ3CI-HFBHV-GMGWB-G2FMX
