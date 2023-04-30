@@ -1,8 +1,10 @@
 # <center><font size=10>Welcome Center</font></center>
-> <center> Your device is running the Windows Longhorn distribution of IVBX (FireNate). </center>
+> <center> Your device is running the Windows Longhorn distribution of IVBX. </center>
+
+<center><font size=20>FireNate</font></center>
 
 <center> You can use the navigation directly on this website or search directly in the address bar. </center>
 
 ***
 
-[Enter the IVBX Server](../)
+[Enter the IVBX Server](/..)
