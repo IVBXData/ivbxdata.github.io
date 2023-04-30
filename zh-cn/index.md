@@ -2,9 +2,7 @@
 
 > 本网页仅用于IVBX的系统发布和资源分享，不作商业用途。
 
-[ IVBX Data B站账号 ](https://space.bilibili.com/1171551865)
-
-[ AngelaEnder B站账号 ](https://space.bilibili.com/515586861)
+[查看 IVBX 团队](/zh-cn/Teams)
 
 [ FireNate / CverNate II 下载](https://www.bilibili.com/read/cv18109258)
 
