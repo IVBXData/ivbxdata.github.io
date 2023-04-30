@@ -9,3 +9,5 @@
 [YuHua_o](https://space.bilibili.com/1468597922)
 
 [BSOD-MEMZ](https://space.bilibili.com/1975308950)
+
+[返回 IVBX Server (简体中文)](/zh-cn)
