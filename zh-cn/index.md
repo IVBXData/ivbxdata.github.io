@@ -7,6 +7,10 @@
 
 [进入 IVBX 下载页面](/zh-cn/Downloads)
 
-
-
 Enjoy！
+
+***
+
+[進入 IVBX Server (繁體中文)](/zh-tw)
+
+[Enter the IVBX Server](/en-us)
