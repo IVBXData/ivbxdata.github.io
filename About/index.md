@@ -21,4 +21,4 @@ Windows Longhorn CverNate II 计划（已停更）的延续。预计在2024/1/27
 
 ***
 
-[Return](ivbxdata.github.io)
+[Return](/..)
