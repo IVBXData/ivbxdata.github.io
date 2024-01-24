@@ -1,14 +1,17 @@
-# IVBX 团队
+# WinBetaMUI Team
 
-[AeroGNOME](https://space.bilibili.com/515586861)
 
-[IVBX Data](https://space.bilibili.com/1171551865)
+[林烽玄Windstorm](https://space.bilibili.com/1171551865)
 
-[WinBetaLover](https://space.bilibili.com/410645610)
+[WinBetaUser](https://space.bilibili.com/410645610)
 
 [YuHua_o](https://space.bilibili.com/1468597922)
 
 [BSOD-MEMZ](https://space.bilibili.com/1975308950)
+
+[AndyChung123](https://space.bilibili.com/2119761603)
+
+[Nicrozoft](https://github.com/Nicrozoft)
 
 ***
 
