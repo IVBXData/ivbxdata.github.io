@@ -2,6 +2,8 @@
 
 > This website is for LinFengxuan Windstorm system distribution and resource sharing only, not for commercial use.
 
+This page is incomplete, please wait for the author to update!
+
 Enjoy!
 
 ***
