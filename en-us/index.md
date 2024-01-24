@@ -1,6 +1,6 @@
 # Welcome to IVBX Server! 
 
-> This website is for IVBX system distribution and resource sharing only, not for commercial use.
+> This website is for LinFengxuan Windstorm system distribution and resource sharing only, not for commercial use.
 
 Enjoy!
 
