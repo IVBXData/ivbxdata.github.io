@@ -1,8 +1,8 @@
-# IVBX 数据
+# IVBX Data
 
 [ FireNate / CverNate II 下载](https://www.bilibili.com/read/cv18109258)
 
-(即将到来) CverNate OS
+[ CverNate OS ](https://www.123pan.com/s/5ue8Vv-cxvu3.html)
 
 ***
 
