@@ -4,7 +4,7 @@
 本网站采用Markdown语言编写，目的是可以在低版本内核的浏览器中运行。
 
 ## IVBX Data
->林烽玄Windstorm
+>林烽玄Windst0rm
 
 普通一人，本网站的维护者
 
