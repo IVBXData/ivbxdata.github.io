@@ -13,8 +13,6 @@
 
 [Nicrozoft](https://github.com/Nicrozoft)
 
-[March7thDev](https://space.bilibili.com/515586861)
-
 ***
 
 [返回 IVBX Server (简体中文)](/zh-cn)
