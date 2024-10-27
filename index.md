@@ -12,4 +12,4 @@
 
 ***
 
-# [NEW!](/CverNate)
+# [CverNate OS Download](/CverNate)
