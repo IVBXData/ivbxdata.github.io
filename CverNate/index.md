@@ -100,7 +100,7 @@ tips：如果完成安装且界面显示正常，建议拍摄虚拟机快照用�
 
 ## 关于以后的更新
 
-CverNate OS 将是一个长期慢速更新的计划。如有建议或想要加入新版本的测试，[请联系我](https://space.bilibili.com/1171551865)。
+CverNate OS 已停止更新。如有建议，[请联系我](https://space.bilibili.com/1171551865)。
 
 ***
 
