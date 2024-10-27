@@ -5,7 +5,7 @@
 
 [查看 WinBetaMUI Team](/zh-cn/Teams)
 
-[进入 林烽玄Windstorm 下载页面](/zh-cn/Downloads)
+[进入 Hyper Windstorm 下载页面](/zh-cn/Downloads)
 
 Enjoy！
 
