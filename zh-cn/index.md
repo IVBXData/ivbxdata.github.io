@@ -1,5 +1,5 @@
 # 欢迎来到 IVBX Server (简体中文)！ 
-> 本网页仅用于 林烽玄Windstorm 的系统发布和资源分享，不作商业用途。
+> 本网页仅用于 Hyper Windstorm 的系统发布和资源分享，不作商业用途。
 
 [使用 IVBX Server 进行导航](/zh-cn/Search)
 
