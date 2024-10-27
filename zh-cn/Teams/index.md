@@ -1,7 +1,7 @@
 # WinBetaMUI Team
 
 
-[Hyper Windstorm](https://space.bilibili.com/1171551865)
+[Hyper Windst0rm](https://space.bilibili.com/1171551865)
 
 [WinBetaUser](https://space.bilibili.com/410645610)
 
