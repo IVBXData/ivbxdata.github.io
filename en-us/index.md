@@ -1,8 +1,8 @@
 # Welcome to IVBX Server! 
 
-> This website is for Hyper Windstorm system distribution and resource sharing only, not for commercial use.
+> This website is for Hyper Windst0rm system distribution and resource sharing only, not for commercial use.
 
-This page is incomplete, please wait for the author to update!
+This page has been discontinued
 
 Enjoy!
 
