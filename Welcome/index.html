@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <title>Welcome Center - IVBX</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('index') no-repeat center center fixed; /* 设置背景图 */
+            background-size: cover;
+            color: #333;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 背景模糊效果 */
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 80%;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #0078D4;
+            margin-bottom: 20px;
+        }
+
+        /* FireNate文字动画 */
+        @keyframes fireNateAnimation {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(10px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #FF6347; /* 红色文字 */
+            margin-bottom: 20px;
+            animation: fireNateAnimation 2s ease-out; /* 添加动画 */
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #0078D4;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        a:hover {
+            background-color: #005A8A;
+            transform: scale(1.05);
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            font-size: 12px;
+            color: #A0A0A0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome Center</h1>
+        <p>Your device is running the Windows Longhorn distribution of IVBX.</p>
+        
+        <h2>FireNate</h2>
+        
+        <p>You can use the navigation directly on this website or search directly in the address bar.</p>
+        
+        <a href="/..">Enter the IVBX Server</a>
+    </div>
+
+    <footer>&copy; <span id="footer-year"></span> Hyper Windst0rm</footer>
+
+    <script type="text/javascript">
+        // 动态更新时间戳
+        document.getElementById("footer-year").innerText = new Date().getFullYear();
+    </script>
+</body>
+</html>
+
