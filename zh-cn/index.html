@@ -7,14 +7,16 @@
     <title>IVBX Server</title>
     <style type="text/css">
         body {
-            background-image: url('index'); /* 保留原背景图片路径 */
+            background-image: url('index'); /* 这里请确认背景图片路径 */
             background-repeat: no-repeat;
             background-position: center;
+            background-size: cover; /* 使背景图铺满整个页面 */
             padding: 0;
             margin: 0 auto;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
             animation: fadeIn 2s ease-out;
+            overflow: hidden; /* 禁止滚动条 */
         }
         @keyframes fadeIn {
             from {
@@ -80,7 +82,7 @@
             transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
             border-radius: 6px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px); /* 背景模糊效果 */
         }
         .acrylic-button:hover {
             background: rgba(0, 120, 212, 0.1);
@@ -191,5 +193,7 @@
     document.getElementById("footer").innerHTML = '&copy; ' + new Date().getFullYear() + ' Hyper Windst0rm';
 </script>
 </html>
+
+
 
 
