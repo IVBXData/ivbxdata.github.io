@@ -108,31 +108,55 @@
             animation: colorChange 3s ease-in-out infinite;
         }
 
-        /* 玻璃按钮样式 */
-        .glass-button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid #0078D4;
-            color: #0078D4; /* 蓝色文字 */
-            padding: 15px 32px;
-            text-align: center;
+        /* 进入按钮样式 */
+        .enter-button {
+            background: rgba(0, 120, 212, 0.3); /* 半透明蓝色背景，透明度更高 */
+            color: white;
+            padding: 20px 40px;
             font-size: 1.5em;
-            border-radius: 8px;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
+            border-radius: 25px;
             text-decoration: none;
             display: inline-block;
-            transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px); /* 更强的亚克力玻璃效果 */
+            margin-top: 40px;
         }
 
-        .glass-button:hover {
-            background-color: rgba(0, 120, 212, 0.1);
+        .enter-button:hover {
+            background-color: #005A8A;
+            transform: scale(1.1);
+        }
+
+        .enter-button:active {
+            transform: scale(1);
+        }
+
+        /* 关于按钮样式 */
+        .about-button {
+            background: rgba(255, 255, 255, 0.2); /* 更强透明度的半透明背景 */
+            color: #0078D4;
+            padding: 10px 20px;
+            font-size: 1.0em;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px); /* 更强的亚克力玻璃效果 */
+            position: absolute;
+            bottom: 20px; /* 位置固定在底部 */
+        }
+
+        .about-button:hover {
+            background-color: #0078D4;
+            color: white;
             transform: scale(1.05);
-            border-color: #005A8A;
         }
 
-        .glass-button:active {
+        .about-button:active {
             transform: scale(0.95);
         }
 
@@ -155,9 +179,13 @@
     </div>
 
     <!-- 进入按钮 -->
-    <a href="/zh-cn" class="glass-button">进入</a>
+    <a href="/zh-cn" class="enter-button">进入</a>
+
+    <!-- 关于按钮 -->
+    <a href="/About" class="about-button">关于</a>
 
 </body>
 </html>
+
 
 
