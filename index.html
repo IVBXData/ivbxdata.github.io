@@ -7,10 +7,10 @@
     <style type="text/css">
         /* 背景与整体页面样式 */
         body {
-            background-image: url('index'); /* 背景图 */
+            background-image: url('index'); /* 在这里替换为您背景图片的路径 */
             background-repeat: no-repeat;
             background-position: center center;
-            background-size: cover; /* 背景图片铺满页面 */
+            background-size: cover; /* 背景图片铺满整个页面 */
             padding: 0;
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 使用WinUI的字体 */
@@ -141,7 +141,9 @@
     <!-- 页眉 -->
     <header>
         <h1>IVBX Server</h1>
-        <h2><a href="/zh-cn" style="color: #0078D4;">简体中文</a></h2>
+        <h2>
+            <button class="acrylic-button" onclick="window.location.href='/zh-cn'">简体中文</button>
+        </h2>
     </header>
 
     <!-- 时钟加载动画 -->
@@ -155,8 +157,12 @@
 
     <!-- 内容区域 -->
     <div class="content">
-        <p><a href="/About" style="font-size: 18px; color: #0078D4;">关于</a></p>
-        <p><a href="/CverNate" class="acrylic-button">CverNate OS 下载</a></p>
+        <p>
+            <button class="acrylic-button" onclick="window.location.href='/About'">关于</button>
+        </p>
+        <p>
+            <button class="acrylic-button" onclick="window.location.href='/CverNate'">CverNate OS 下载</button>
+        </p>
     </div>
 
     <!-- 页脚 -->
