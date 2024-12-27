@@ -1,283 +1,329 @@
 <!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="/index.css">
-		<title>IVBX Server</title>
-		<style type="text/css">
-		body {
-			background-image:url('/xiaomai');
-			background-repeat:no-repeat;
-			background-position:center;
-			padding: 0;
-            margin: 0 auto;
-		}
-		#footer {
-                height: 40px;
-                line-height: 40px;
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                text-align: center;
-                background: transparent;
-                color: #2F4F4F;
-                font-family: Arial;
-                font-size: 12px;
-                letter-spacing: 1px;
-            }
-
-            .content {
-                height: 1800px;
-                width: 100%;
-                text-align: center;
-            }
-
-	*{
-		list-style: none;
-		padding:0;
-		margin: 0;
-	}
-	.box{
-		width: 700px;
-		height: 600px;
-		border: 1px solid black;
-		margin: 10px auto 0;
-	}
-	.in{
-		width: 100%;
-		height: 50px;
-		border-bottom: 1px solid black;
-		padding: 10px 0;
-	}
-	#text{
-		width: 300px;
-		height: 100%;
-		border: 1px solid #C20018;
-		box-sizing:border-box;
-		margin-left: 20px;
-		padding-left: 10px;
-		font-size: 20px;
-	}
-	#submit{
-		width: 100px;
-		height: 86%;
-		margin-left: 20px;
-		border: 1px solid #C20018;
-		background: #d2051e;
-		color: #fff;
-		cursor: pointer;
-	}
-	#submit:hover{
-		background: #C20018;
-	}
-	.bottom{
-		width: 100%;
-		height: 580px;
-	}
-	.bottom div{
-		width: 47%;
-		float: left;
-		border: 1px solid black;
-		box-sizing:border-box;
-		margin-left: 2%;
-		margin-top: 10px;
-	}
-	.bottom div b{
-		text-align: center;
-		font-size: 24px;
-		height: 50px;
-		line-height: 50px;
-		color: #123456;
-		display: block;
-		border-bottom: 1px solid black;
-	}
-	.bottom div ul{
-		width: 100%;
-	}
-	.bottom div ul li{
-		margin: 5px;
-		box-sizing:border-box;
-		border-bottom: 1px solid #654321;
-		margin-bottom: 3px;
-	}
-	.bottom div ul li p{
-		text-align: right;
-	}
-	.success,.del{
-		height: 30px;
-		text-align: center;
-		line-height: 30px;
-		background: #d2051e;
-		color: #fff;
-		font-size: 20px;
-		cursor: pointer;
-	}
-	.success,.del:hover{
-		background: #C20018;
-	}
-     </style>
-	
-		<link rel="icon" href="444">
-	</head>
-	<header>
-		<h1 align="center">IVBX Server</h1>
-	</header>
-	<body>
-		<h2 align="center">私人便利贴</h2>
-		<h3 id="footer"><span id="clock"><span> </h3> 
-		 <!--<h4 id="footer"><span id="clock"><span> </h4>--> 
-		 <div class="box">
-		<div class="in">
-			<input type="text" id="text">
-			<input type="button" id="submit" value="提交">
-		</div>
-		<div class="bottom">
-			<div>
-				<b>未完成</b>
-				<ul class="plan"></ul>
-				<div class="success">完成</div>
-			</div>
-			<div>
-				<b>已完成</b>
-				<ul class="done"></ul>
-				<div class="del">删除</div>
-			</div>
-		</div>
-	</div>
-		</body>
-		<script>
-　      var days=["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
-　      function goTime(){
-        var time = new Date();
-        var year = time.getFullYear();
-        var month = time.getMonth()+1;//返回0-11,所以+1
-        var date = time.getDate();
-        var day = time.getDay();//返回0-6
-        var hour = time.getHours();
-        var minute = time.getMinutes();
-        var second = time.getSeconds();
-        var str =year+"年"+month+"月"+date+"日"+ hour+"点"+minute+"分"+second+"秒";
-        window.clock.innerHTML = str;
-    }
-    window.onload=function(){
-       window.clock=document.getElementById("clock");
-       window.setInterval("goTime()",1000);
-    }
-    </script>
-	<script>
-	var text = document.querySelector("#text");
-    var submit = document.querySelector("#submit");
-    var plan = document.querySelector(".plan");
-    var done = document.querySelector(".done");
-    var success = document.querySelector(".success");
-    var del = document.querySelector(".del");
-    var data = [];
-
-	function getData() {
-        return localStorage.todo ? JSON.parse(localStorage.todo) : [];
-    }
-    function saveData(data) {
-        localStorage.todo = JSON.stringify(data);
-    }
-    function reWrite() {
-        data = getData();
-        var str1 = "", str2 = "";
-        data.forEach(function (v, i) {
-            if (!v.done) {
-                str1 += `<li id=${i}>
-                <input type="checkbox">
-                <span onblur="change(this)" contenteditable>${v.content}</span>
-                <p class="time">${time(v.time)}</p>
-                </li>`;
-            } else {
-                str2 += `<li id=${i}>
-                <input type="checkbox">
-                <span>${v.content}</span>
-                <p class="time">${time(v.time)}</p>
-                </li>`;
-            }
-        });
-        plan.innerHTML = str1;
-        done.innerHTML = str2;
-    }
-    reWrite();
-    function time(t) {
-        var date = new Date();
-        date.setTime(t);
-        var year = date.getFullYear();
-        var month = setZero(date.getMonth() + 1);
-        var day = setZero(date.getDate());
-        var hour = setZero(date.getHours());
-        var minutes = setZero(date.getMinutes());
-        var seconds = setZero(date.getSeconds());
-        return year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
-    }
-    function setZero(num) {
-        if (num < 10) {
-            return "0" + num;
-        } else {
-            return num;
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVBX Server</title>
+    <link rel="stylesheet" href="https://unpkg.com/@fluentui/web-components@latest/dist/webcomponents/fast-element.min.css">
+    <style>
+        body {
+            background: url('index') no-repeat center center fixed;
+            background-size: cover; /* 背景图片自适应 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: #333;
         }
-    }
-    submit.onclick = function () {
-        if (text.value == "") {
-            return
+
+        /* 整体容器 */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* 微透明背景 */
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
-        var val = text.value;
-        text.value = "";
-        data = getData();
-        var date = new Date();
-        var time = date.getTime();
-        data.push({content: val, time:time, done: false});
-        saveData(data);
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #1a73e8;
+            font-weight: bold;
+        }
+
+        header h2 {
+            font-size: 1.5rem;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* 输入区域 */
+        .tile {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .input-control {
+            width: 75%;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #333;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-control:focus {
+            border-color: #1a73e8;
+        }
+
+        .button {
+            padding: 12px 24px;
+            background-color: #1a73e8;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            font-size: 1rem;
+        }
+
+        .button:hover {
+            background-color: #0059b3;
+        }
+
+        /* 横向任务列表样式 */
+        .task-container {
+            margin-top: 30px;
+        }
+
+        .task-container h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        /* 使用Flexbox水平排列任务部分 */
+        .tasks-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .task-column {
+            width: 48%; /* 每个列占据一半宽度，之间有间隔 */
+        }
+
+        .listview {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .listview li {
+            background: #f1f1f1;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            transition: background-color 0.3s;
+        }
+
+        .listview li:hover {
+            background-color: #e1e1e1;
+        }
+
+        .task-text {
+            flex-grow: 1;
+            font-size: 1rem;
+        }
+
+        .task-time {
+            font-size: 0.9rem;
+            color: #888;
+            text-align: right;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .task-actions button {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .task-actions .complete {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .task-actions .delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* 时钟样式 */
+        #footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 30px;
+        }
+
+        /* 暗黑模式 */
+        body.dark-mode {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        .dark-mode .container {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .dark-mode .button {
+            background-color: #6200ea;
+        }
+
+        .dark-mode .button:hover {
+            background-color: #3700b3;
+        }
+
+        .dark-mode .input-control {
+            background: #333;
+            color: #fff;
+        }
+
+        .dark-mode .task-container h3,
+        .dark-mode .task-text {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IVBX Server</h1>
+            <h2>私人便利贴</h2>
+        </header>
+
+        <!-- 输入区域 -->
+        <div class="tile">
+            <input type="text" id="text" class="input-control" placeholder="添加新任务">
+            <button id="submit" class="button">提交</button>
+        </div>
+
+        <!-- 横向排列的未完成和已完成任务区域 -->
+        <div class="task-container">
+            <div class="tasks-row">
+                <!-- 未完成任务 -->
+                <div class="task-column">
+                    <h3>未完成</h3>
+                    <ul class="listview plan"></ul>
+                    <button class="button" id="success">标记为完成</button>
+                </div>
+
+                <!-- 已完成任务 -->
+                <div class="task-column">
+                    <h3>已完成</h3>
+                    <ul class="listview done"></ul>
+                    <button class="button" id="del">删除已完成任务</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 时钟 -->
+        <footer id="footer">
+            <span id="clock"></span>
+        </footer>
+    </div>
+
+    <script>
+        // 时钟功能
+        function goTime() {
+            var time = new Date();
+            var year = time.getFullYear();
+            var month = time.getMonth() + 1;
+            var date = time.getDate();
+            var hour = time.getHours();
+            var minute = time.getMinutes();
+            var second = time.getSeconds();
+            var str = year + "年" + month + "月" + date + "日 " + hour + "点" + minute + "分" + second + "秒";
+            document.getElementById("clock").innerHTML = str;
+        }
+        setInterval(goTime, 1000);
+
+        var data = [];
+        var text = document.querySelector("#text");
+        var submit = document.querySelector("#submit");
+        var plan = document.querySelector(".plan");
+        var done = document.querySelector(".done");
+        var success = document.querySelector("#success");
+        var del = document.querySelector("#del");
+
+        function getData() {
+            return localStorage.todo ? JSON.parse(localStorage.todo) : [];
+        }
+
+        function saveData(data) {
+            localStorage.todo = JSON.stringify(data);
+        }
+
+        function reWrite() {
+            data = getData();
+            var str1 = "", str2 = "";
+            data.forEach(function(v, i) {
+                if (!v.done) {
+                    str1 += `<li id=${i}>
+                        <span class="task-text" contenteditable>${v.content}</span>
+                        <p class="task-time">${time(v.time)}</p>
+                        <div class="task-actions">
+                            <button class="complete" onclick="markComplete(${i})">完成</button>
+                        </div>
+                    </li>`;
+                } else {
+                    str2 += `<li id=${i}>
+                        <span class="task-text">${v.content}</span>
+                        <p class="task-time">${time(v.time)}</p>
+                        <div class="task-actions">
+                            <button class="delete" onclick="deleteTask(${i})">删除</button>
+                        </div>
+                    </li>`;
+                }
+            });
+            plan.innerHTML = str1;
+            done.innerHTML = str2;
+        }
+
         reWrite();
-    }
-    success.onclick = function(){
-    	var d = document.querySelectorAll(".plan li input")
-    	var index = [];
-    	d.forEach(function(v,i){
-    		if (v.checked) {
-    			index.push(v.parentNode.id)
-    		}
-    	})
 
-    	data = getData();
-    	index.forEach(function(v,i){
-    		data[v].done = true;
-    	})
-    	saveData(data);
-    	reWrite()
-    }
-    del.onclick = function(){
-    	var d = document.querySelectorAll(".done li input")
-    	var index1 = [];
-    	d.forEach(function(v,i){
-    		if (v.checked) {
-    			index1.push(v.parentNode.id)
-    		}
-    	})
+        function time(t) {
+            var date = new Date(t);
+            return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+        }
 
-    	data = getData();
-    	for(var i=index1.length-1; i>=0; i--){
-    		if (data[index1[i]].done==true) {
-    			data.splice(index1[i],1)
-    		}
-    	}
-    	saveData(data);
-    	reWrite()
-    }
+        submit.onclick = function() {
+            if (text.value === "") return;
+            var val = text.value;
+            text.value = "";
+            data = getData();
+            var time = new Date().getTime();
+            data.push({ content: val, time: time, done: false });
+            saveData(data);
+            reWrite();
+        }
 
-    function change(ele){
-    	console.log(1)
-    	var id = ele.parentNode.id;
-    	var val = ele.innerHTML;
-    	var data = getData();
-    	data[id].content = val;
-    	saveData(data);
-    	reWrite();
-    }
+        function markComplete(i) {
+            data[i].done = true;
+            saveData(data);
+            reWrite();
+        }
 
-
-</script>
+        function deleteTask(i) {
+            data.splice(i, 1);
+            saveData(data);
+            reWrite();
+        }
+    </script>
+</body>
 </html>
