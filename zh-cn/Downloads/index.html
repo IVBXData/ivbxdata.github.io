@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <title>IVBX Server</title>
     <style type="text/css">
+        /* 去除滚动条 */
+        html, body {
+            height: 100%; /* 确保页面的高度填满整个视口 */
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* 去除滚动条 */
+        }
+
         /* 背景与整体页面样式 */
         body {
             background-image: url('index'); /* 背景图 */
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover; /* 背景图片铺满页面 */
-            padding: 0;
-            margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 使用WinUI的字体 */
             color: #333;
             animation: fadeIn 2s ease-out;
@@ -209,3 +215,4 @@
 
 </body>
 </html>
+
