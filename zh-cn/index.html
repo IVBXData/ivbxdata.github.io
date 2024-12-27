@@ -1,77 +1,176 @@
 <!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="index.css">
-		<title>IVBX Server</title>
-		<style type="text/css">
-		body {
-			background-image:url('index');
-			background-repeat:no-repeat;
-			background-position:center;
-		        padding: 0;
-                        margin: 0 auto;
-		}
-		#footer {
-                height: 10px;
-                line-height: 10px;
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                text-align: center;
-                background: transparent;
-                color: #2F4F4F;
-                font-family: Arial;
-                font-size: 12px;
-                letter-spacing: 1px;
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>IVBX Server</title>
+    <style type="text/css">
+        body {
+            background-image: url('index');
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 0;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            color: #333;
+            animation: fadeIn 2s ease-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
             }
-
-            .content {
-                height: 1800px;
-                width: 100%;
-                text-align: center;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-	    .mybutton1{
-		background-color:transparent;
-		border-style:none;
-	}
-		</style>
-		<link rel="icon" href="icon">
-        </head>
-	<header>
-		<h1 align="center">IVBX Server</h1>
-	</header>
-	<body>
-                <h3 align="center"><span id="clock"></span></h3>
-		<h3 align="center">
-			<div class="NavBarFooter">
-				<a href="Downloads"><button class="am-btn am-round white">下载相关文件</button></a>
-				<br/><br/>			<a href="Teams"><button class="am-btn am-round white">查看WinBetaMUI Team</button></a>
-				<br/><br/>
-				<a href="Notes"><button class="am-btn am-round white">私人便利贴</button></a>
-			</div>
-		</h3>
-		<h4 id="footer"><script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1278940797&web_id=1278940797"></script></h4>
-	</body>
-	<script>
-　      var days=["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
-　      function goTime(){
+        }
+        header {
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #FFA500; /* Orange text color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        #footer {
+            height: 10px;
+            line-height: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: transparent;
+            color: #2F4F4F;
+            font-family: Arial;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        .content {
+            height: 1800px;
+            width: 100%;
+            text-align: center;
+        }
+        .acrylic-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: #FFA500; /* Orange text color */
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .acrylic-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .clock-number {
+            display: inline-block;
+            animation: jump 0.5s;
+        }
+        .loading {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 2px;
+            background-color: #333;
+            border-radius: 50%;
+            animation: loading 1s infinite alternate;
+        }
+        .loading:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .loading:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes loading {
+            from {
+                transform: scale(1);
+                background-color: #FFA500; /* Orange */
+            }
+            to {
+                transform: scale(1.5);
+                background-color: #FF8C00; /* Dark Orange */
+            }
+        }
+    </style>
+    <link rel="icon" href="icon">
+</head>
+<header>
+    <h1 align="center">IVBX Server</h1>
+</header>
+<body>
+    <h3 align="center"><span id="clock"><span class="loading"></span><span class="loading"></span><span class="loading"></span></span></h3>
+    <h3 align="center">
+        <div class="NavBarFooter">
+            <a href="Downloads"><button class="acrylic-button">下载相关文件</button></a>
+            <br/><br/>
+            <a href="Teams"><button class="acrylic-button">查看WinBetaMUI Team</button></a>
+            <br/><br/>
+            <a href="Notes"><button class="acrylic-button">私人便利贴</button></a>
+        </div>
+    </h3>
+    <h4 id="footer"></h4>
+    <script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1278940797&web_id=1278940797"></script>
+</body>
+<script>
+    var days = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    function goTime() {
         var time = new Date();
         var year = time.getFullYear();
-        var month = time.getMonth()+1;//返回0-11,所以+1
+        var month = time.getMonth() + 1; // 返回0-11, 所以+1
         var date = time.getDate();
-        var day = time.getDay();//返回0-6
+        var day = time.getDay(); // 返回0-6
         var hour = time.getHours();
         var minute = time.getMinutes();
         var second = time.getSeconds();
-        var str =year+"年"+month+"月"+date+"日"+ hour+"点"+minute+"分"+second+"秒";
-        window.clock.innerHTML = str;
+        var str = year + "年" + month + "月" + date + "日 " + hour + "点" + minute + "分" + second + "秒";
+        
+        var clock = document.getElementById("clock");
+        clock.innerHTML = '';
+        for (var i = 0; i < str.length; i++) {
+            var span = document.createElement('span');
+            span.className = 'clock-number';
+            span.innerText = str[i];
+            clock.appendChild(span);
+        }
     }
-    window.onload=function(){
-       window.clock=document.getElementById("clock");
-       window.setInterval("goTime()",1000);
+    window.onload = function () {
+        window.clock = document.getElementById("clock");
+        setTimeout(function () {
+            window.setInterval(goTime, 1000);
+        }, 2000); // 2秒的加载动画
     }
-    </script>
-    <footer id="footer">&copy; 2025 Hyper Windst0rm</footer>
+</script>
+<footer id="footer">&copy; 2025 Hyper Windst0rm</footer>
 </html>
