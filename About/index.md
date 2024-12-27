@@ -1,7 +1,7 @@
 # About
 >IVBX Server
 
-本网站采用Markdown语言编写，目的是可以在低版本内核的浏览器中运行。
+本网站于2024/12/27重新编写。
 
 ## IVBX Data
 >Hyper Windst0rm
