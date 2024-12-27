@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
@@ -7,7 +7,7 @@
     <title>IVBX Server</title>
     <style type="text/css">
         body {
-            background-image: url('index');
+            background-image: url('index'); /* 保留原背景图片路径 */
             background-repeat: no-repeat;
             background-position: center;
             padding: 0;
@@ -124,7 +124,7 @@
             }
         }
     </style>
-    <link rel="icon" href="icon">
+    <link rel="icon" href="icon.png"> <!-- 使用实际的图标文件路径 -->
 </head>
 <header>
     <h1 align="center">IVBX Server</h1>
@@ -141,10 +141,15 @@
         </div>
     </h3>
     <h4 id="footer"></h4>
+
+    <!-- 统计代码 -->
     <script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1278940797&web_id=1278940797"></script>
+
 </body>
 <script>
     var days = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    
+    // 获取当前时间并显示
     function goTime() {
         var time = new Date();
         var year = time.getFullYear();
@@ -154,10 +159,12 @@
         var hour = time.getHours();
         var minute = time.getMinutes();
         var second = time.getSeconds();
-        var str = year + "年" + month + "月" + date + "日 " + hour + "点" + minute + "分" + second + "秒";
+        var str = year + "年" + month + "月" + date + "日 " + days[day] + " " + hour + "点" + minute + "分" + second + "秒";
         
         var clock = document.getElementById("clock");
-        clock.innerHTML = '';
+        clock.innerHTML = ''; // 清空之前的内容
+        
+        // 为时间字符串的每个字符创建一个 <span> 元素
         for (var i = 0; i < str.length; i++) {
             var span = document.createElement('span');
             span.className = 'clock-number';
@@ -165,12 +172,16 @@
             clock.appendChild(span);
         }
     }
+    
     window.onload = function () {
-        window.clock = document.getElementById("clock");
+        // 延时2秒后开始显示时钟
         setTimeout(function () {
-            window.setInterval(goTime, 1000);
+            window.setInterval(goTime, 1000); // 每秒更新一次
         }, 2000); // 2秒的加载动画
     }
+
+    // 动态更新页脚年份
+    document.getElementById("footer").innerHTML = '&copy; ' + new Date().getFullYear() + ' Hyper Windst0rm';
 </script>
-<footer id="footer">&copy; 2025 Hyper Windst0rm</footer>
 </html>
+
