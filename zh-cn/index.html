@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="index.css">
+		<title>IVBX Server</title>
+		<style type="text/css">
+		body {
+			background-image:url('index');
+			background-repeat:no-repeat;
+			background-position:center;
+		        padding: 0;
+                        margin: 0 auto;
+		}
+		#footer {
+                height: 10px;
+                line-height: 10px;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                background: transparent;
+                color: #2F4F4F;
+                font-family: Arial;
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+
+            .content {
+                height: 1800px;
+                width: 100%;
+                text-align: center;
+            }
+	    .mybutton1{
+		background-color:transparent;
+		border-style:none;
+	}
+		</style>
+		<link rel="icon" href="444">
+        </head>
+	<header>
+		<h1 align="center">IVBX Server</h1>
+	</header>
+	<body>
+                <h3 align="center"><span id="clock"></span></h3>
+		<h3 align="center">
+			<div class="NavBarFooter">
+				<a href="Downloads"><button class="am-btn am-round white">下载相关文件</button></a>
+				<br/><br/>
+				<a href="Teams"><button class="am-btn am-round white">查看WinBetaMUI Team</button></a>
+				<br/><br/>
+				<a href="Notes"><button class="am-btn am-round white">私人便利贴</button></a>
+			</div>
+		</h3>
+		<h4 id="footer"><script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1278940797&web_id=1278940797"></script></h4>
+	</body>
+	<script>
+　      var days=["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
+　      function goTime(){
+        var time = new Date();
+        var year = time.getFullYear();
+        var month = time.getMonth()+1;//返回0-11,所以+1
+        var date = time.getDate();
+        var day = time.getDay();//返回0-6
+        var hour = time.getHours();
+        var minute = time.getMinutes();
+        var second = time.getSeconds();
+        var str =year+"年"+month+"月"+date+"日"+ hour+"点"+minute+"分"+second+"秒";
+        window.clock.innerHTML = str;
+    }
+    window.onload=function(){
+       window.clock=document.getElementById("clock");
+       window.setInterval("goTime()",1000);
+    }
+    </script>
+    <script language="javascript">alert('欢迎访问IVBX Server')</script>
+    <footer id="footer">&copy; 2025 Hyper Windst0rm</footer>
+</html>
