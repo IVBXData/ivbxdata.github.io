@@ -1,207 +1,156 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-    <title>IVBX Server</title>
-    <style type="text/css">
-        /* 背景与整体页面样式 */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVBX Server 动画</title>
+    <style>
         body {
-            background-image: url('index'); /* 在这里替换为您背景图片的路径 */
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover; /* 背景图片铺满整个页面 */
+            margin: 0;
             padding: 0;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 使用WinUI的字体 */
-            color: #333;
-            animation: fadeIn 2s ease-out;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            color: #fff;
+            overflow: hidden;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
         }
 
-        /* 页眉 */
-        header {
-            padding: 20px 0;
-            background-color: rgba(0, 0, 0, 0.3); /* WinUI透明背景 */
-            animation: slideIn 1s ease-out;
-            text-align: center;
+        .letter {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+            animation-timing-function: ease-out;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .letter:nth-child(1) {
+            animation-delay: 0.1s;
         }
-
-        /* WinUI 3 风格的蓝色标题 */
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-            color: #0078D4; /* WinUI蓝色 */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 适当的阴影效果 */
-        }
-
-        /* 页脚 */
-        #footer {
-            height: 40px;
-            line-height: 40px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3); /* 半透明背景 */
-            color: #A0A0A0;
-            font-size: 12px;
-        }
-
-        /* 内容区域 */
-        .content {
-            text-align: center;
-            padding-top: 40px; /* 确保内容与页眉间距 */
-        }
-
-        /* 按钮样式，模仿WinUI 3风格 */
-        .acrylic-button {
-            background: rgba(255, 255, 255, 0.2); /* 半透明背景 */
-            backdrop-filter: blur(10px); /* 背景模糊效果 */
-            border: none;
-            color: #0078D4; /* 按钮文字改为蓝色 */
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 10px; /* 圆角按钮 */
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .acrylic-button:hover {
-            background: rgba(0, 120, 215, 0.3); /* 悬浮时背景颜色 */
-            transform: scale(1.05); /* 按钮放大 */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* 增加阴影 */
-        }
-
-        .acrylic-button:active {
-            transform: scale(0.95); /* 按钮点击时缩小 */
-            background: rgba(0, 120, 215, 0.5); /* 点击时的背景颜色 */
-        }
-
-        /* 时钟加载动画 */
-        .loading {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            margin: 0 2px;
-            background-color: #0078D4; /* 蓝色 */
-            border-radius: 50%;
-            animation: loading 1s infinite alternate;
-        }
-
-        .loading:nth-child(2) {
+        .letter:nth-child(2) {
             animation-delay: 0.2s;
         }
-
-        .loading:nth-child(3) {
+        .letter:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        .letter:nth-child(4) {
             animation-delay: 0.4s;
         }
+        .letter:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+        .letter:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+        .letter:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+        .letter:nth-child(8) {
+            animation-delay: 0.8s;
+        }
+        .letter:nth-child(9) {
+            animation-delay: 0.9s;
+        }
+        .letter:nth-child(10) {
+            animation-delay: 1s;
+        }
+        .letter:nth-child(11) {
+            animation-delay: 1.1s;
+        }
 
-        @keyframes loading {
-            from {
-                transform: scale(1);
-                background-color: #0078D4; /* 蓝色 */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            to {
-                transform: scale(1.5);
-                background-color: #005A9E; /* 深蓝色 */
+            60% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+
+        /* 颜色变化动画 */
+        @keyframes colorChange {
+            0% {
+                color: #0078D4; /* 初始颜色 */
+            }
+            50% {
+                color: #FF8C00; /* 中间颜色 */
+            }
+            100% {
+                color: #32CD32; /* 最终颜色 */
+            }
+        }
+
+        .title-container {
+            animation: colorChange 3s ease-in-out infinite;
+        }
+
+        /* 玻璃按钮样式 */
+        .glass-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #0078D4;
+            color: #0078D4; /* 蓝色文字 */
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 1.5em;
+            border-radius: 8px;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+
+        .glass-button:hover {
+            background-color: rgba(0, 120, 212, 0.1);
+            transform: scale(1.05);
+            border-color: #005A8A;
+        }
+
+        .glass-button:active {
+            transform: scale(0.95);
+        }
+
     </style>
-    <link rel="icon" href="/444">
 </head>
 <body>
 
-    <!-- 页眉 -->
-    <header>
-        <h1>IVBX Server</h1>
-        <h2>
-            <button class="acrylic-button" onclick="window.location.href='/zh-cn'">简体中文</button>
-        </h2>
-    </header>
-
-    <!-- 时钟加载动画 -->
-    <h3 align="center">
-        <span id="clock">
-            <span class="loading"></span>
-            <span class="loading"></span>
-            <span class="loading"></span>
-        </span>
-    </h3>
-
-    <!-- 内容区域 -->
-    <div class="content">
-        <p>
-            <button class="acrylic-button" onclick="window.location.href='/About'">关于</button>
-        </p>
-        <p>
-            <button class="acrylic-button" onclick="window.location.href='/CverNate'">CverNate OS 下载</button>
-        </p>
+    <div class="title-container">
+        <span class="letter">I</span>
+        <span class="letter">V</span>
+        <span class="letter">B</span>
+        <span class="letter">X</span>
+        <span class="letter"> </span> <!-- 空格 -->
+        <span class="letter">S</span>
+        <span class="letter">E</span>
+        <span class="letter">R</span>
+        <span class="letter">V</span>
+        <span class="letter">E</span>
+        <span class="letter">R</span>
     </div>
 
-    <!-- 页脚 -->
-    <footer id="footer">&copy; <span id="footer-year">2025</span> Hyper Windst0rm</footer>
-
-    <script type="text/javascript">
-        var days = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-
-        function goTime() {
-            var time = new Date();
-            var year = time.getFullYear();
-            var month = time.getMonth() + 1; // 返回0-11, 所以+1
-            var date = time.getDate();
-            var day = time.getDay(); // 返回0-6
-            var hour = time.getHours();
-            var minute = time.getMinutes();
-            var second = time.getSeconds();
-            var str = year + "年" + month + "月" + date + "日 " + hour + "点" + minute + "分" + second + "秒";
-            
-            var clock = document.getElementById("clock");
-            clock.innerHTML = '';
-            for (var i = 0; i < str.length; i++) {
-                var span = document.createElement('span');
-                span.className = 'clock-number';
-                span.innerText = str[i];
-                clock.appendChild(span);
-            }
-        }
-
-        window.onload = function () {
-            window.clock = document.getElementById("clock");
-            setTimeout(function () {
-                window.setInterval(goTime, 1000);
-            }, 2000); // 2秒的加载动画
-
-            // 动态更新页脚年份
-            document.getElementById("footer-year").innerText = new Date().getFullYear();
-        }
-    </script>
+    <!-- 进入按钮 -->
+    <a href="/zh-cn" class="glass-button">进入</a>
 
 </body>
 </html>
