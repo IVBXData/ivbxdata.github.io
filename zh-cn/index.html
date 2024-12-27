@@ -12,7 +12,7 @@
             background-position: center;
             padding: 0;
             margin: 0 auto;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
             animation: fadeIn 2s ease-out;
         }
@@ -30,6 +30,7 @@
             padding: 20px 0;
             background-color: rgba(0, 0, 0, 0.1);
             animation: slideIn 1s ease-out;
+            text-align: center;
         }
         @keyframes slideIn {
             from {
@@ -44,7 +45,7 @@
         h1 {
             margin: 0;
             font-size: 2.5em;
-            color: #FFA500; /* Orange text color */
+            color: #0078D4; /* WinUI primary color */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
         #footer {
@@ -66,44 +67,44 @@
             text-align: center;
         }
         .acrylic-button {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            color: #FFA500; /* Orange text color */
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #0078D4;
+            color: #0078D4; /* WinUI primary color */
             padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
+            margin: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-            border-radius: 8px;
+            border-radius: 6px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
         }
         .acrylic-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-            border-color: rgba(255, 255, 255, 0.7);
+            background: rgba(0, 120, 212, 0.1);
+            transform: scale(1.05);
+            border-color: #005A8A;
+        }
+        .clock-number {
+            display: inline-block;
+            animation: jump 0.5s;
         }
         @keyframes jump {
             0%, 100% {
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-8px);
             }
-        }
-        .clock-number {
-            display: inline-block;
-            animation: jump 0.5s;
         }
         .loading {
             display: inline-block;
             width: 10px;
             height: 10px;
             margin: 0 2px;
-            background-color: #333;
+            background-color: #0078D4;
             border-radius: 50%;
             animation: loading 1s infinite alternate;
         }
@@ -116,21 +117,27 @@
         @keyframes loading {
             from {
                 transform: scale(1);
-                background-color: #FFA500; /* Orange */
+                background-color: #0078D4;
             }
             to {
                 transform: scale(1.5);
-                background-color: #FF8C00; /* Dark Orange */
+                background-color: #005A8A;
             }
         }
     </style>
     <link rel="icon" href="icon.png"> <!-- 使用实际的图标文件路径 -->
 </head>
 <header>
-    <h1 align="center">IVBX Server</h1>
+    <h1>IVBX Server</h1>
 </header>
 <body>
-    <h3 align="center"><span id="clock"><span class="loading"></span><span class="loading"></span><span class="loading"></span></span></h3>
+    <h3 align="center">
+        <span id="clock">
+            <span class="loading"></span>
+            <span class="loading"></span>
+            <span class="loading"></span>
+        </span>
+    </h3>
     <h3 align="center">
         <div class="NavBarFooter">
             <a href="Downloads"><button class="acrylic-button">下载相关文件</button></a>
@@ -184,4 +191,5 @@
     document.getElementById("footer").innerHTML = '&copy; ' + new Date().getFullYear() + ' Hyper Windst0rm';
 </script>
 </html>
+
 
