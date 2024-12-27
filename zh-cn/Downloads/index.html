@@ -1,71 +1,211 @@
- <!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="/index.css">
-		<title>IVBX Server</title>
-		<style type="text/css">
-		body {
-			background-image:url('/xiaomai');
-			background-repeat:no-repeat;
-			background-position:center;
-			padding: 0;
-            　　　　　　　margin: 0 auto;
-		}
-		#footer {
-                height: 40px;
-                line-height: 40px;
-                position: fixed; 
-                bottom: 0;
-                width: 100%;
-                text-align: center;
-                background: transparent;
-                color: #2F4F4F;
-                font-family: Arial;
-                font-size: 12px;
-                letter-spacing: 1px;
-            }
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <title>IVBX Server</title>
+    <style type="text/css">
+        /* 背景与整体页面样式 */
+        body {
+            background-image: url('index'); /* 背景图 */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover; /* 背景图片铺满页面 */
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 使用WinUI的字体 */
+            color: #333;
+            animation: fadeIn 2s ease-out;
+        }
 
-            .content {
-                height: 1800px;
-                width: 100%;
-                text-align: center;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
             }
-		</style>
-		<link rel="icon" href="/444">
-	</head>
-	<header>
-		<h1 align="center">下载相关文件:</h1>
-	</header>
-	<body>
-		<h3 align="center"><span id="clock"></span></h3>
-		<h3 align="center">
-			<div class="NavBarFooter">
-				<a href="https://www.bilibili.com/read/cv18109258"><button class="am-btn am-round white">FireNate / CverNate II 下载</button></a>
-				<br/><br/>
-				<a href="https://www.123pan.com/s/5ue8Vv-cxvu3.html"><button class="am-btn am-round white">CverNate OS</button></a>
-			</div>
-		</h3>
-	</body>
-	<script>
-　  var days=["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
-　  function goTime(){
-        var time = new Date();
-        var year = time.getFullYear();
-        var month = time.getMonth()+1;//返回0-11,所以+1
-        var date = time.getDate();
-        var day = time.getDay();//返回0-6
-        var hour = time.getHours();
-        var minute = time.getMinutes();
-        var second = time.getSeconds();
-        var str =year+"年"+month+"月"+date+"日"+ hour+"点"+minute+"分"+second+"秒";
-        window.clock.innerHTML = str;
-    }
-    window.onload=function(){
-       window.clock=document.getElementById("clock");
-       window.setInterval("goTime()",1000);
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 页眉 */
+        header {
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.3); /* WinUI透明背景 */
+            animation: slideIn 1s ease-out;
+            text-align: center;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* WinUI 3 风格的蓝色标题 */
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #0078D4; /* WinUI蓝色 */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 适当的阴影效果 */
+        }
+
+        /* 页脚 */
+        #footer {
+            height: 40px;
+            line-height: 40px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3); /* 半透明背景 */
+            color: #A0A0A0;
+            font-size: 12px;
+        }
+
+        /* 内容区域 */
+        .content {
+            height: calc(100vh - 160px); /* 内容区域占满剩余空间 */
+            width: 100%;
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        /* 按钮样式，模仿WinUI 3风格 */
+        .acrylic-button {
+            background: rgba(255, 255, 255, 0.2); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 背景模糊效果 */
+            border: none;
+            color: #0078D4; /* 按钮文字改为蓝色 */
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 10px; /* 圆角按钮 */
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .acrylic-button:hover {
+            background: rgba(0, 120, 215, 0.3); /* 悬浮时背景颜色 */
+            transform: scale(1.05); /* 按钮放大 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* 增加阴影 */
+        }
+
+        .acrylic-button:active {
+            transform: scale(0.95); /* 按钮点击时缩小 */
+            background: rgba(0, 120, 215, 0.5); /* 点击时的背景颜色 */
+        }
+
+        /* 时钟加载动画 */
+        .loading {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 2px;
+            background-color: #0078D4; /* 蓝色 */
+            border-radius: 50%;
+            animation: loading 1s infinite alternate;
+        }
+
+        .loading:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loading {
+            from {
+                transform: scale(1);
+                background-color: #0078D4; /* 蓝色 */
+            }
+            to {
+                transform: scale(1.5);
+                background-color: #005A9E; /* 深蓝色 */
+            }
+        }
+    </style>
+    <link rel="icon" href="/444">
+</head>
+<body>
+
+    <!-- 页眉 -->
+    <header>
+        <h1>下载相关文件</h1>
+    </header>
+
+    <!-- 时钟加载动画 -->
+    <h3 align="center">
+        <span id="clock">
+            <span class="loading"></span>
+            <span class="loading"></span>
+            <span class="loading"></span>
+        </span>
+    </h3>
+
+    <!-- 按钮链接 -->
+    <div class="content">
+        <div class="acrylic-button-wrapper">
+            <a href="https://www.bilibili.com/read/cv18109258">
+                <button class="acrylic-button">FireNate / CverNate II 下载</button>
+            </a>
+        </div>
+        <br/><br/>
+        <div class="acrylic-button-wrapper">
+            <a href="https://www.123pan.com/s/5ue8Vv-cxvu3.html">
+                <button class="acrylic-button">CverNate OS</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer id="footer">&copy; <span id="footer-year">2025</span> Hyper Windst0rm</footer>
+
+    <script type="text/javascript">
+        var days = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
+        function goTime() {
+            var time = new Date();
+            var year = time.getFullYear();
+            var month = time.getMonth() + 1; // 返回0-11, 所以+1
+            var date = time.getDate();
+            var day = time.getDay(); // 返回0-6
+            var hour = time.getHours();
+            var minute = time.getMinutes();
+            var second = time.getSeconds();
+            var str = year + "年" + month + "月" + date + "日 " + hour + "点" + minute + "分" + second + "秒";
+            
+            var clock = document.getElementById("clock");
+            clock.innerHTML = '';
+            for (var i = 0; i < str.length; i++) {
+                var span = document.createElement('span');
+                span.className = 'clock-number';
+                span.innerText = str[i];
+                clock.appendChild(span);
+            }
+        }
+
+        window.onload = function () {
+            window.clock = document.getElementById("clock");
+            setTimeout(function () {
+                window.setInterval(goTime, 1000);
+            }, 2000); // 2秒的加载动画
+
+            // 动态更新页脚年份
+            document.getElementById("footer-year").innerText = new Date().getFullYear();
+        }
     </script>
-    <footer id="footer">&copy;2025 Hyper Windst0rm </footer>
+
+</body>
 </html>
