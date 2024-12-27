@@ -1,10 +1,6 @@
-# 请选择显示语言/請選擇顯示語言/Select the display language
+# IVBX Server
 
 [简体中文 ](/zh-cn) 
-
-[繁體中文 ](/zh-tw) 
-
-[English ](/en-us) 
 
 ***
 
@@ -13,3 +9,11 @@
 ***
 
 # [CverNate OS Download](/CverNate)
+
+
+
+
+
+
+
+© Hyper Windst0rm
