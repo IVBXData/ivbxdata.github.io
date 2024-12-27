@@ -10,17 +10,31 @@
             background-image: url('index'); /* 替换为你的背景图片路径 */
             background-repeat: no-repeat;
             background-position: center;
-            background-size: cover; /* 使背景图铺满整个页面 */
+            background-size: cover;
+            background-attachment: fixed; /* 背景固定，滚动时不动 */
             padding: 0;
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
         }
+        /* 添加标题栏从上方滑入的动画 */
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         header {
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.5); /* 背景加深，增强标题的可读性 */
             color: white;
             text-align: center;
+            animation: slideInFromTop 1s ease-out; /* 使用刚刚定义的动画 */
         }
         h1 {
             margin: 0;
