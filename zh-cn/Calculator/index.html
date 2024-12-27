@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网页计算器</title>
     <style>
+        /* 去除滚动条 */
+        html, body {
+            overflow: hidden; /* 禁止滚动条 */
+            margin: 0;
+            padding: 0;
+            height: 100%; /* 确保占满整个页面 */
+        }
+
         /* 背景样式 */
         body {
             font-family: Arial, sans-serif;
@@ -16,8 +24,29 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
             color: #333;
+            flex-direction: column;
+        }
+
+        /* 标题栏样式 */
+        .title-bar {
+            width: 100%;
+            background-color: rgba(0, 120, 212, 0.8); /* 透明度效果 */
+            color: white;
+            font-size: 1.8em;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: -60px; /* 初始位置，隐藏在页面顶部 */
+            left: 0;
+            z-index: 1000;
+            animation: slideDown 1s ease-out forwards; /* 动画效果：从顶部滑入 */
+        }
+
+        /* 标题栏滑动动画 */
+        @keyframes slideDown {
+            0% { top: -60px; }
+            100% { top: 0; }
         }
 
         /* 计算器容器样式 */
@@ -28,6 +57,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             animation: slideUp 1s ease-out; /* 动画效果 */
             position: relative;
+            margin-top: 60px; /* 留出顶部空间，避免被标题栏遮挡 */
         }
 
         /* slideUp 动画 */
@@ -192,6 +222,12 @@
 </head>
 <body>
 
+    <!-- 标题栏 -->
+    <div class="title-bar">
+        IVBX Server
+    </div>
+
+    <!-- 计算器容器 -->
     <div class="calculator">
         <input type="text" id="display" class="display" disabled>
         <div class="buttons">
@@ -218,23 +254,22 @@
             <button class="button" onclick="appendToDisplay('.')">.</button>
             <button class="button" onclick="appendToDisplay('%')">%</button>
 
-            <!-- 查看历史记录按钮，已经修改为占据两列并且更宽 -->
-            <button class="button history" onclick="showHistory()">查看历史记录</button>
+            <!-- 历史记录按钮 -->
+            <button class="button history" onclick="showHistory()">历史记录</button>
         </div>
     </div>
 
     <!-- 历史记录弹窗 -->
-    <div id="historyModal" class="history-modal">
-        <h2>历史记录</h2>
+    <div class="history-modal" id="historyModal">
+        <h2>计算历史记录</h2>
         <ul id="historyList"></ul>
         <button onclick="closeHistory()">关闭</button>
     </div>
 
     <script>
-        // 获取显示区域
         const display = document.getElementById('display');
-        const historyList = document.getElementById('historyList');
         const historyModal = document.getElementById('historyModal');
+        const historyList = document.getElementById('historyList');
 
         // 清空显示
         function clearDisplay() {
@@ -246,7 +281,7 @@
             display.value += value;
         }
 
-        // 计算表达式并存储历史记录
+        // 计算表达式
         function calculate() {
             try {
                 const result = eval(display.value);  // 使用 eval 计算表达式
