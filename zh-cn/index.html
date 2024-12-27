@@ -7,7 +7,10 @@
     <title>IVBX Server</title>
     <style type="text/css">
         body {
-            background-image: url('index'); /* 这里请确认背景图片路径 */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* 保证页面的最小高度为视口高度 */
+            background-image: url('index'); /* 确保图片路径正确 */
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover; /* 使背景图铺满整个页面 */
@@ -18,6 +21,8 @@
             animation: fadeIn 2s ease-out;
             overflow: hidden; /* 禁止滚动条 */
         }
+
+        /* 背景淡入效果 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -28,12 +33,15 @@
                 transform: translateY(0);
             }
         }
+
+        /* 头部标题动画 */
         header {
             padding: 20px 0;
             background-color: rgba(0, 0, 0, 0.1);
             animation: slideIn 1s ease-out;
             text-align: center;
         }
+
         @keyframes slideIn {
             from {
                 transform: translateY(-100%);
@@ -44,30 +52,31 @@
                 opacity: 1;
             }
         }
+
         h1 {
             margin: 0;
             font-size: 2.5em;
             color: #0078D4; /* WinUI primary color */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
+
         #footer {
-            height: 10px;
-            line-height: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            height: 40px;
+            line-height: 40px;
             text-align: center;
             background: transparent;
             color: #2F4F4F;
             font-family: Arial;
             font-size: 12px;
             letter-spacing: 1px;
+            margin-top: auto; /* 让页脚保持在页面底部 */
         }
+
         .content {
-            height: 1800px;
-            width: 100%;
+            flex-grow: 1; /* 内容区域填充剩余空间 */
             text-align: center;
         }
+
         .acrylic-button {
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid #0078D4;
@@ -84,15 +93,18 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(8px); /* 背景模糊效果 */
         }
+
         .acrylic-button:hover {
             background: rgba(0, 120, 212, 0.1);
             transform: scale(1.05);
             border-color: #005A8A;
         }
+
         .clock-number {
             display: inline-block;
             animation: jump 0.5s;
         }
+
         @keyframes jump {
             0%, 100% {
                 transform: translateY(0);
@@ -101,6 +113,7 @@
                 transform: translateY(-8px);
             }
         }
+
         .loading {
             display: inline-block;
             width: 10px;
@@ -110,12 +123,15 @@
             border-radius: 50%;
             animation: loading 1s infinite alternate;
         }
+
         .loading:nth-child(2) {
             animation-delay: 0.2s;
         }
+
         .loading:nth-child(3) {
             animation-delay: 0.4s;
         }
+
         @keyframes loading {
             from {
                 transform: scale(1);
@@ -129,32 +145,37 @@
     </style>
     <link rel="icon" href="icon.png"> <!-- 使用实际的图标文件路径 -->
 </head>
+
 <header>
     <h1>IVBX Server</h1>
 </header>
+
 <body>
-    <h3 align="center">
-        <span id="clock">
-            <span class="loading"></span>
-            <span class="loading"></span>
-            <span class="loading"></span>
-        </span>
-    </h3>
-    <h3 align="center">
-        <div class="NavBarFooter">
-            <a href="Downloads"><button class="acrylic-button">下载相关文件</button></a>
-            <br/><br/>
-            <a href="Teams"><button class="acrylic-button">查看WinBetaMUI Team</button></a>
-            <br/><br/>
-            <a href="Notes"><button class="acrylic-button">私人便利贴</button></a>
-        </div>
-    </h3>
-    <h4 id="footer"></h4>
+    <div class="content">
+        <h3 align="center">
+            <span id="clock">
+                <span class="loading"></span>
+                <span class="loading"></span>
+                <span class="loading"></span>
+            </span>
+        </h3>
+        <h3 align="center">
+            <div class="NavBarFooter">
+                <a href="Downloads"><button class="acrylic-button">下载相关文件</button></a>
+                <br/><br/>
+                <a href="Teams"><button class="acrylic-button">查看WinBetaMUI Team</button></a>
+                <br/><br/>
+                <a href="Notes"><button class="acrylic-button">私人便利贴</button></a>
+            </div>
+        </h3>
+    </div>
+    <h4 id="footer">&copy; 2024 Hyper Windst0rm</h4>
 
     <!-- 统计代码 -->
     <script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1278940797&web_id=1278940797"></script>
 
 </body>
+
 <script>
     var days = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
     
@@ -189,9 +210,8 @@
         }, 2000); // 2秒的加载动画
     }
 
-    // 动态更新页脚年份
-    document.getElementById("footer").innerHTML = '&copy; ' + new Date().getFullYear() + ' Hyper Windst0rm';
 </script>
+
 </html>
 
 
