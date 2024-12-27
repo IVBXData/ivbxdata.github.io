@@ -13,7 +13,7 @@
 ## WinBetaMUI Team
 
 WinBetaMUI Team 是一个团队，在 Longhorn 4074 汉化包 5.0 发布时成立。
-现有 6 位成员：WinBetaUser、BSOD-MEMZ、Nicrozoft、AndyChung123、Hyper Windstorm 和 YuHua_o。
+现有 6 位成员：WinBetaUser、BSOD-MEMZ、Nicrozoft、AndyChung123、Hyper Windst0rm 和 YuHua_o。
 此团队主要汉化 Windows Longhorn build 4074 和其他 Windows Beta，是第一个汉化部分 Windows Beta 的团队，原名 WinBetaCN Team。
 
 ## CverNate OS
