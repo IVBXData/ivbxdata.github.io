@@ -5,33 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="stylesheet" type="text/css" href="index.css">
     <title>IVBX Server</title>
+
+    <!-- 添加网站图标 -->
+    <link rel="icon" href="icon" type="image/x-icon">
+    <!-- 也可以使用 PNG 格式 -->
+    <!-- <link rel="icon" href="icon.png" type="image/png"> -->
+
     <style type="text/css">
         body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* 保证页面的最小高度为视口高度 */
-            background-image: url('index'); /* 确保图片路径正确 */
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover; /* 使背景图铺满整个页面 */
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
             padding: 0;
-            margin: 0 auto;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            animation: fadeIn 2s ease-out;
-            overflow: hidden; /* 禁止滚动条 */
-        }
-
-        /* 背景淡入效果 */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            background-image: url('index'); /* 确保图片路径正确 */
+            background-size: cover;
+            background-position: center;
         }
 
         /* 头部标题动画 */
@@ -40,6 +31,8 @@
             background-color: rgba(0, 0, 0, 0.1);
             animation: slideIn 1s ease-out;
             text-align: center;
+            position: relative;
+            z-index: 102;
         }
 
         @keyframes slideIn {
@@ -56,10 +49,179 @@
         h1 {
             margin: 0;
             font-size: 2.5em;
-            color: #0078D4; /* WinUI primary color */
+            color: #0078D4;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        /* 任务栏 */
+        .taskbar {
+            background: rgba(255, 255, 255, 0.5); /* 半透明白色背景 */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 103;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 开始菜单按钮（圆角正方形） */
+        .start-menu-button {
+            background: transparent; /* 默认背景色透明，与页面背景一致 */
+            border: none;
+            border-radius: 10px; /* 较小的圆角 */
+            width: 50px; /* 正方形按钮 */
+            height: 50px; /* 正方形按钮 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* 开始菜单按钮悬浮效果 */
+        .start-menu-button:hover {
+            background: #005A8A; /* 悬浮时变蓝 */
+            transform: scale(1.1); /* 鼠标悬停时放大 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 增加阴影 */
+        }
+
+        /* 开始菜单按钮点击效果 */
+        .start-menu-button:active {
+            transform: scale(0.95); /* 点击时缩小 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 减小阴影 */
+            background: #004C77; /* 点击时背景变暗 */
+        }
+
+        /* 开始菜单展开状态下的按钮样式 */
+        .start-menu-button.open {
+            background: #0078D4; /* 改变背景色 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 为按钮添加阴影 */
+            transform: scale(1.05); /* 微微放大按钮 */
+        }
+
+        /* 开始菜单 */
+        .start-menu {
+            position: fixed;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw; /* 动态宽度为视口宽度的80% */
+            max-width: 600px; /* 最大宽度为600px */
+            height: calc(100vh - 180px);
+            max-height: 70vh;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 101;
+            animation: riseUp 0.3s ease-out;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        @keyframes riseUp {
+            from {
+                transform: translateY(800px) translateX(-50%);
+            }
+            to {
+                transform: translateY(0) translateX(-50%);
+            }
+        }
+
+        /* 开始菜单移出动画 */
+        @keyframes moveOut {
+            from {
+                transform: translateY(0) translateX(-50%);
+            }
+            to {
+                transform: translateY(800px) translateX(-50%);
+            }
+        }
+
+        .start-menu h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #0078D4;
+        }
+
+        .start-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* WinUI 3 风格按钮 */
+        .acrylic-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #0078D4;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            margin-bottom: 12px;
+        }
+
+        .acrylic-button:hover {
+            background: rgba(0, 120, 212, 0.2);
+            transform: scale(1.05);
+        }
+
+        .start-menu ul li {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f2f2f2;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .start-menu ul li:hover {
+            background: #e0e0e0;
+        }
+
+        /* 搜索框样式 */
+        .search-bar {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 搜索按钮样式 */
+        .search-button {
+            padding: 10px 15px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            background: #0078D4;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .search-button:hover {
+            background: #005A8A;
+        }
+
+        /* 页脚 */
         #footer {
             height: 40px;
             line-height: 40px;
@@ -69,153 +231,84 @@
             font-family: Arial;
             font-size: 12px;
             letter-spacing: 1px;
-            margin-top: auto; /* 让页脚保持在页面底部 */
+            margin-top: auto;
         }
 
-        .content {
-            flex-grow: 1; /* 内容区域填充剩余空间 */
-            text-align: center;
-        }
-
-        .acrylic-button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid #0078D4;
-            color: #0078D4; /* WinUI primary color */
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-            border-radius: 6px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px); /* 背景模糊效果 */
-        }
-
-        .acrylic-button:hover {
-            background: rgba(0, 120, 212, 0.1);
-            transform: scale(1.05);
-            border-color: #005A8A;
-        }
-
-        .clock-number {
-            display: inline-block;
-            animation: jump 0.5s;
-        }
-
-        @keyframes jump {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        .loading {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            margin: 0 2px;
-            background-color: #0078D4;
-            border-radius: 50%;
-            animation: loading 1s infinite alternate;
-        }
-
-        .loading:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes loading {
-            from {
-                transform: scale(1);
-                background-color: #0078D4;
-            }
-            to {
-                transform: scale(1.5);
-                background-color: #005A8A;
-            }
+        /* 开始菜单按钮中的图标 */
+        .start-menu-button img {
+            width: 30px; /* 缩小图标的宽度 */
+            height: 30px; /* 缩小图标的高度 */
         }
     </style>
-    <link rel="icon" href="icon.png"> <!-- 使用实际的图标文件路径 -->
 </head>
 
-<header>
-    <h1>IVBX Server</h1>
-</header>
-
 <body>
-    <div class="content">
-        <h3 align="center">
-            <span id="clock">
-                <span class="loading"></span>
-                <span class="loading"></span>
-                <span class="loading"></span>
-            </span>
-        </h3>
-        <h3 align="center">
-            <div class="NavBarFooter">
-                <a href="Downloads"><button class="acrylic-button">下载相关文件</button></a>
-                <br/><br/>
-                <a href="Teams"><button class="acrylic-button">查看WinBetaMUI Team</button></a>
-                <br/><br/>
-                <a href="Notes"><button class="acrylic-button">私人便利贴</button></a>
-                <br/><br/>
-                <a href="Calculator"><button class="acrylic-button">网页计算器</button></a>
-            </div>
-        </h3>
+    <header>
+        <h1>IVBX Server</h1>
+    </header>
+
+    <!-- 开始菜单 -->
+    <div class="start-menu" id="startMenu">
+        <h3>开始</h3>
+
+        <!-- 搜索框 -->
+        <form action="https://www.bing.com/search" method="get">
+            <input type="text" name="q" class="search-bar" placeholder="请输入搜索内容..." />
+            <button type="submit" class="search-button">搜索</button>
+        </form>
+
+        <ul>
+            <li><a href="Downloads"><button class="acrylic-button">下载相关文件</button></a></li>
+            <li><a href="Teams"><button class="acrylic-button">查看WinBetaMUI Team</button></a></li>
+            <li><a href="Notes"><button class="acrylic-button">私人便利贴</button></a></li>
+            <li><a href="Calculator"><button class="acrylic-button">网页计算器</button></a></li>
+        </ul>
     </div>
-    <h4 id="footer">&copy; 2024 Hyper Windst0rm</h4>
 
-    <!-- 统计代码 -->
-    <script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1278940797&web_id=1278940797"></script>
+    <!-- 任务栏 -->
+    <div class="taskbar">
+        <button class="start-menu-button" onclick="toggleStartMenu()">
+            <img src="icon.png" alt="Start Menu Icon">
+        </button>
+    </div>
 
-</body>
+    <h4 id="footer">&copy; <span id="year"></span> Hyper Windst0rm</h4>
 
-<script>
-    var days = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-    
-    // 获取当前时间并显示
-    function goTime() {
-        var time = new Date();
-        var year = time.getFullYear();
-        var month = time.getMonth() + 1; // 返回0-11, 所以+1
-        var date = time.getDate();
-        var day = time.getDay(); // 返回0-6
-        var hour = time.getHours();
-        var minute = time.getMinutes();
-        var second = time.getSeconds();
-        var str = year + "年" + month + "月" + date + "日 " + days[day] + " " + hour + "点" + minute + "分" + second + "秒";
-        
-        var clock = document.getElementById("clock");
-        clock.innerHTML = ''; // 清空之前的内容
-        
-        // 为时间字符串的每个字符创建一个 <span> 元素
-        for (var i = 0; i < str.length; i++) {
-            var span = document.createElement('span');
-            span.className = 'clock-number';
-            span.innerText = str[i];
-            clock.appendChild(span);
+    <script>
+        // 显示/隐藏开始菜单
+        function toggleStartMenu() {
+            var menu = document.getElementById('startMenu');
+            var button = document.querySelector('.start-menu-button');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+                menu.style.animation = 'riseUp 0.3s ease-out';
+                button.classList.add('open');
+            } else {
+                menu.style.animation = 'moveOut 0.3s ease-out';
+                setTimeout(function() {
+                    menu.style.display = 'none';
+                }, 300);
+                button.classList.remove('open');
+            }
         }
-    }
-    
-    window.onload = function () {
-        // 延时2秒后开始显示时钟
-        setTimeout(function () {
-            window.setInterval(goTime, 1000); // 每秒更新一次
-        }, 2000); // 2秒的加载动画
-    }
 
-</script>
+        // 点击空白区域收起菜单
+        window.addEventListener('click', function(event) {
+            var menu = document.getElementById('startMenu');
+            var button = document.querySelector('.start-menu-button');
+            if (!menu.contains(event.target) && !button.contains(event.target)) {
+                menu.style.animation = 'moveOut 0.3s ease-out';
+                setTimeout(function() {
+                    menu.style.display = 'none';
+                }, 300);
+                button.classList.remove('open');
+            }
+        });
 
+        // 自动更新页脚年份
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
 </html>
-
-
 
 
