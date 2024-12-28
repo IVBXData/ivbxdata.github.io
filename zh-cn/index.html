@@ -7,7 +7,7 @@
     <title>IVBX Server</title>
 
     <!-- 添加网站图标 -->
-    <link rel="icon" href="icon" type="image/x-icon">
+    <link rel="icon" href="icon.ico" type="image/x-icon">
     <!-- 也可以使用 PNG 格式 -->
     <!-- <link rel="icon" href="icon.png" type="image/png"> -->
 
@@ -190,10 +190,15 @@
             background: #e0e0e0;
         }
 
-        /* 搜索框样式 */
-        .search-bar {
+        /* 搜索框和按钮样式 */
+        .search-container {
+            display: flex;
             width: 100%;
             margin-bottom: 15px;
+        }
+
+        .search-bar {
+            flex: 1;
             padding: 10px;
             font-size: 1.2em;
             border-radius: 5px;
@@ -204,7 +209,6 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* 搜索按钮样式 */
         .search-button {
             padding: 10px 15px;
             font-size: 1.2em;
@@ -213,8 +217,7 @@
             color: #fff;
             border: none;
             cursor: pointer;
-            width: 100%;
-            margin-top: 5px;
+            margin-left: 10px;
         }
 
         .search-button:hover {
@@ -253,8 +256,10 @@
 
         <!-- 搜索框 -->
         <form action="https://www.bing.com/search" method="get">
-            <input type="text" name="q" class="search-bar" placeholder="请输入搜索内容..." />
-            <button type="submit" class="search-button">搜索</button>
+            <div class="search-container">
+                <input type="text" name="q" class="search-bar" placeholder="请输入搜索内容..." />
+                <button type="submit" class="search-button">搜索</button>
+            </div>
         </form>
 
         <ul>
@@ -310,5 +315,4 @@
     </script>
 </body>
 </html>
-
 
