@@ -23,6 +23,7 @@
             background-size: cover;
             background-position: center;
             overflow: hidden; /* 禁止滚动条 */
+            position: relative;
         }
 
         /* 头部标题动画 */
@@ -51,6 +52,20 @@
             font-size: 2.5em;
             color: #0078D4;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 点击开始后淡出文字 */
+        .start-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            z-index: 101;
+            opacity: 1;
+            transition: opacity 1s ease;
         }
 
         /* 任务栏升起动画 */
@@ -120,15 +135,8 @@
 
         /* 开始菜单按钮中的图标 */
         .start-menu-button img {
-            width: 30px; /* 缩小图标的宽度 */
-            height: 30px; /* 缩小图标的高度 */
-        }
-
-        /* 开始菜单展开状态下的按钮样式 */
-        .start-menu-button.open {
-            background: #0078D4; /* 改变背景色 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 为按钮添加阴影 */
-            transform: scale(1.05); /* 微微放大按钮 */
+            width: 25px; /* 缩小图标的宽度 */
+            height: 25px; /* 缩小图标的高度 */
         }
 
         /* 开始菜单 */
@@ -273,6 +281,9 @@
         <h1>IVBX Server</h1>
     </header>
 
+    <!-- 背景文字 -->
+    <div class="start-text" id="startText">点击开始</div>
+
     <!-- 开始菜单 -->
     <div class="start-menu" id="startMenu">
         <h3>开始</h3>
@@ -307,10 +318,12 @@
         function toggleStartMenu() {
             var menu = document.getElementById('startMenu');
             var button = document.querySelector('.start-menu-button');
+            var startText = document.getElementById('startText');
             if (menu.style.display === 'none' || menu.style.display === '') {
                 menu.style.display = 'block';
                 menu.style.animation = 'riseUp 0.3s ease-out';
                 button.classList.add('open');
+                startText.style.opacity = '0';  // 淡出背景文字
             } else {
                 menu.style.animation = 'moveOut 0.3s ease-out';
                 setTimeout(function() {
@@ -324,6 +337,7 @@
         window.addEventListener('click', function(event) {
             var menu = document.getElementById('startMenu');
             var button = document.querySelector('.start-menu-button');
+            var startText = document.getElementById('startText');
             if (!menu.contains(event.target) && !button.contains(event.target)) {
                 menu.style.animation = 'moveOut 0.3s ease-out';
                 setTimeout(function() {
@@ -338,4 +352,3 @@
     </script>
 </body>
 </html>
-
