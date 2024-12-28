@@ -12,6 +12,7 @@
     <!-- <link rel="icon" href="icon.png" type="image/png"> -->
 
     <style type="text/css">
+        /* 禁止滚动条 */
         body {
             display: flex;
             flex-direction: column;
@@ -23,6 +24,7 @@
             background-image: url('index'); /* 确保图片路径正确 */
             background-size: cover;
             background-position: center;
+            overflow: hidden; /* 禁止滚动条 */
         }
 
         /* 头部标题动画 */
@@ -111,8 +113,8 @@
             transform: translateX(-50%);
             width: 80vw; /* 动态宽度为视口宽度的80% */
             max-width: 600px; /* 最大宽度为600px */
-            height: calc(100vh - 180px);
-            max-height: 70vh;
+            height: calc(100vh - 180px); /* 减去头部和任务栏的高度 */
+            max-height: 70vh; /* 最大高度 */
             background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             padding: 20px;
@@ -315,4 +317,5 @@
     </script>
 </body>
 </html>
+
 
