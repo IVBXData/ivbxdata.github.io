@@ -8,8 +8,6 @@
 
     <!-- 添加网站图标 -->
     <link rel="icon" href="icon.ico" type="image/x-icon">
-    <!-- 也可以使用 PNG 格式 -->
-    <!-- <link rel="icon" href="icon.png" type="image/png"> -->
 
     <style type="text/css">
         /* 禁止滚动条 */
@@ -55,6 +53,26 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        /* 任务栏升起动画 */
+        @keyframes taskbarRiseUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* 开始按钮升起动画 */
+        @keyframes startButtonRiseUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
         /* 任务栏 */
         .taskbar {
             background: rgba(255, 255, 255, 0.5); /* 半透明白色背景 */
@@ -68,6 +86,7 @@
             padding: 0 20px;
             z-index: 103;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            animation: taskbarRiseUp 0.5s ease-out; /* 应用升起动画 */
         }
 
         /* 开始菜单按钮（圆角正方形） */
@@ -82,6 +101,7 @@
             align-items: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            animation: startButtonRiseUp 0.5s ease-out; /* 为开始按钮添加升起动画 */
         }
 
         /* 开始菜单按钮悬浮效果 */
@@ -96,6 +116,12 @@
             transform: scale(0.95); /* 点击时缩小 */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 减小阴影 */
             background: #004C77; /* 点击时背景变暗 */
+        }
+
+        /* 开始菜单按钮中的图标 */
+        .start-menu-button img {
+            width: 30px; /* 缩小图标的宽度 */
+            height: 30px; /* 缩小图标的高度 */
         }
 
         /* 开始菜单展开状态下的按钮样式 */
@@ -239,11 +265,6 @@
             margin-top: auto;
         }
 
-        /* 开始菜单按钮中的图标 */
-        .start-menu-button img {
-            width: 30px; /* 缩小图标的宽度 */
-            height: 30px; /* 缩小图标的高度 */
-        }
     </style>
 </head>
 
@@ -317,5 +338,4 @@
     </script>
 </body>
 </html>
-
 
