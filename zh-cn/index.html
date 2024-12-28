@@ -269,6 +269,9 @@
 
         /* 页脚 */
         #footer {
+            position: fixed;
+            bottom: 60px; /* 调整页脚的位置，放置在任务栏上方 */
+            width: 100%;
             height: 40px;
             line-height: 40px;
             text-align: center;
@@ -277,7 +280,7 @@
             font-family: Arial;
             font-size: 12px;
             letter-spacing: 1px;
-            margin-top: auto;
+            z-index: 100;
         }
 
     </style>
@@ -359,3 +362,4 @@
     </script>
 </body>
 </html>
+
