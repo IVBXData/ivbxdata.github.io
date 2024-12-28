@@ -7,10 +7,10 @@
     <style>
         /* 去除滚动条 */
         html, body {
-            overflow: hidden; /* 禁止滚动条 */
+            overflow: hidden;
             margin: 0;
             padding: 0;
-            height: 100%; /* 确保占满整个页面 */
+            height: 100%;
         }
 
         /* 背景样式 */
@@ -26,24 +26,24 @@
             height: 100vh;
             color: #333;
             flex-direction: column;
+            position: relative; /* 确保计算器在页面的上层 */
         }
 
         /* 标题栏样式 */
         .title-bar {
             width: 100%;
-            background-color: rgba(0, 120, 212, 0.8); /* 透明度效果 */
+            background-color: rgba(0, 120, 212, 0.8);
             color: white;
             font-size: 1.8em;
             padding: 10px;
             text-align: center;
             position: fixed;
-            top: -60px; /* 初始位置，隐藏在页面顶部 */
+            top: -60px;
             left: 0;
             z-index: 1000;
-            animation: slideDown 1s ease-out forwards; /* 动画效果：从顶部滑入 */
+            animation: slideDown 1s ease-out forwards;
         }
 
-        /* 标题栏滑动动画 */
         @keyframes slideDown {
             0% { top: -60px; }
             100% { top: 0; }
@@ -51,22 +51,21 @@
 
         /* 计算器容器样式 */
         .calculator {
-            background-color: rgba(255, 255, 255, 0.9); /* 背景设置为透明白色 */
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            animation: slideUp 1s ease-out; /* 动画效果 */
+            animation: slideUp 1s ease-out;
             position: relative;
-            margin-top: 60px; /* 留出顶部空间，避免被标题栏遮挡 */
+            margin-top: 60px;
+            z-index: 2000; /* 提高 z-index，确保在其他元素上层 */
         }
 
-        /* slideUp 动画 */
         @keyframes slideUp {
             0% { transform: translateY(100%); }
             100% { transform: translateY(0); }
         }
 
-        /* 显示区域样式 */
         .display {
             width: 260px;
             height: 50px;
@@ -81,15 +80,13 @@
             box-sizing: border-box;
         }
 
-        /* 按钮区域样式 */
         .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 70px); /* 增大按钮宽度 */
+            grid-template-columns: repeat(4, 70px);
             gap: 10px;
             margin-bottom: 10px;
         }
 
-        /* 按钮样式 */
         .button {
             width: 70px;
             height: 70px;
@@ -100,33 +97,30 @@
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-            animation: popIn 0.5s ease-in-out; /* 为按钮添加弹出动画 */
+            animation: popIn 0.5s ease-in-out;
             display: flex;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
         }
 
-        /* 弹出动画 */
         @keyframes popIn {
             0% { transform: scale(0); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* 按钮悬停样式 */
         .button:hover {
             background-color: #005A8A;
-            transform: scale(1.1); /* 放大效果 */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 增加阴影 */
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* 按钮点击样式 */
         .button:active {
-            transform: scale(0.9); /* 按钮缩小 */
-            background-color: #003B5C; /* 点击时背景颜色 */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 点击时阴影效果 */
+            transform: scale(0.9);
+            background-color: #003B5C;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* 运算符按钮样式 */
         .button.operator {
             background-color: #FF6347;
         }
@@ -135,7 +129,6 @@
             background-color: #D94A2B;
         }
 
-        /* 等于按钮样式 */
         .button.equal {
             background-color: #28a745;
         }
@@ -144,7 +137,6 @@
             background-color: #218838;
         }
 
-        /* 清除按钮样式 */
         .button.clear {
             background-color: #dc3545;
         }
@@ -153,13 +145,12 @@
             background-color: #c82333;
         }
 
-        /* 查看历史记录按钮样式 */
         .button.history {
             background-color: #ff9900;
-            grid-column: span 2; /* 横跨两列 */
+            grid-column: span 2;
             font-size: 1.2em;
             justify-content: center;
-            width: 140px; /* 设置按钮的宽度 */
+            width: 140px;
             text-align: center;
         }
 
@@ -167,7 +158,6 @@
             background-color: #e68a00;
         }
 
-        /* 历史记录弹窗样式 */
         .history-modal {
             position: fixed;
             top: 50%;
@@ -218,6 +208,43 @@
         .history-modal button:hover {
             background-color: #005A8A;
         }
+
+        /* 返回按钮容器，调整为页面底部居中 */
+        .back-button-container {
+            position: fixed;
+            bottom: 20px; /* 固定在底部 */
+            left: 50%; /* 居中 */
+            transform: translateX(-50%); /* 完全居中 */
+            z-index: 1000;
+        }
+
+        /* 返回按钮样式 */
+        .back-button {
+            background-color: transparent;
+            color: #0078D4;
+            border: 2px solid #0078D4;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0078D4;
+            color: white;
+            border-color: #0078D4;
+        }
+
+        .back-button:active {
+            transform: scale(0.95);
+            background-color: #005A8A;
+            color: white;
+            border-color: #005A8A;
+        }
     </style>
 </head>
 <body>
@@ -254,7 +281,6 @@
             <button class="button" onclick="appendToDisplay('.')">.</button>
             <button class="button" onclick="appendToDisplay('%')">%</button>
 
-            <!-- 历史记录按钮 -->
             <button class="button history" onclick="showHistory()">历史记录</button>
         </div>
     </div>
@@ -266,57 +292,60 @@
         <button onclick="closeHistory()">关闭</button>
     </div>
 
+    <!-- 返回按钮 -->
+    <div class="back-button-container">
+        <button class="back-button" onclick="goBack()">返回</button>
+    </div>
+
     <script>
         const display = document.getElementById('display');
         const historyModal = document.getElementById('historyModal');
         const historyList = document.getElementById('historyList');
 
-        // 清空显示
         function clearDisplay() {
             display.value = '';
         }
 
-        // 在显示区域添加字符
         function appendToDisplay(value) {
             display.value += value;
         }
 
-        // 计算表达式
         function calculate() {
             try {
-                const result = eval(display.value);  // 使用 eval 计算表达式
+                const result = eval(display.value);
                 display.value = result;
-                storeHistory(result); // 存储结果到历史记录
+                storeHistory(result);
             } catch (e) {
                 display.value = '错误';
             }
         }
 
-        // 存储历史记录到 localStorage
         function storeHistory(result) {
             let history = JSON.parse(localStorage.getItem('history')) || [];
             if (history.length >= 5) {
-                history.shift(); // 删除最旧的记录
+                history.shift();
             }
             history.push(result);
             localStorage.setItem('history', JSON.stringify(history));
         }
 
-        // 显示历史记录
         function showHistory() {
             const history = JSON.parse(localStorage.getItem('history')) || [];
-            historyList.innerHTML = ''; // 清空列表
+            historyList.innerHTML = '';
             history.forEach(item => {
                 const li = document.createElement('li');
                 li.textContent = item;
                 historyList.appendChild(li);
             });
-            historyModal.style.display = 'block'; // 显示弹窗
+            historyModal.style.display = 'block';
         }
 
-        // 关闭历史记录弹窗
         function closeHistory() {
-            historyModal.style.display = 'none'; // 隐藏弹窗
+            historyModal.style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
         }
     </script>
 
