@@ -239,7 +239,7 @@
         .search-container {
             display: flex;
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .search-bar {
@@ -279,6 +279,20 @@
             bottom: 60px; /* 页脚位置在开始按钮上方 */
             width: 100%;
             z-index: 100; /* 页脚层级低于开始菜单 */
+        }
+
+        /* 针对触摸设备优化 */
+        @media (hover: none) and (pointer: coarse) {
+            /* 触摸设备的按钮放大效果 */
+            .start-menu-button:active {
+                transform: scale(1.2); /* 点击时放大 */
+            }
+
+            /* 触摸设备上的按钮缩放效果 */
+            .start-menu-button {
+                transition: transform 0.3s ease;
+                transform-origin: center center;
+            }
         }
     </style>
 </head>
@@ -358,4 +372,3 @@
     </script>
 </body>
 </html>
-
