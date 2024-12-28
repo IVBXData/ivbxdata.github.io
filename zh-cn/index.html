@@ -139,6 +139,13 @@
             height: 25px; /* 缩小图标的高度 */
         }
 
+        /* 开始菜单展开状态下按钮的样式 */
+        .start-menu-button.active {
+            background: #0078D4; /* 展开时按钮变为蓝色 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 为按钮添加阴影 */
+            transform: scale(1.1); /* 微微放大按钮 */
+        }
+
         /* 开始菜单 */
         .start-menu {
             position: fixed;
@@ -322,14 +329,14 @@
             if (menu.style.display === 'none' || menu.style.display === '') {
                 menu.style.display = 'block';
                 menu.style.animation = 'riseUp 0.3s ease-out';
-                button.classList.add('open');
+                button.classList.add('active');  // 添加 active 类
                 startText.style.opacity = '0';  // 淡出背景文字
             } else {
                 menu.style.animation = 'moveOut 0.3s ease-out';
                 setTimeout(function() {
                     menu.style.display = 'none';
                 }, 300);
-                button.classList.remove('open');
+                button.classList.remove('active');  // 移除 active 类
             }
         }
 
@@ -343,7 +350,7 @@
                 setTimeout(function() {
                     menu.style.display = 'none';
                 }, 300);
-                button.classList.remove('open');
+                button.classList.remove('active');
             }
         });
 
