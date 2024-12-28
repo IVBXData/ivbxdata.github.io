@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden; /* 去除滚动条 */
+            box-sizing: border-box; /* 确保内边距和边框不影响布局 */
         }
 
         body {
@@ -71,6 +72,7 @@
             flex-direction: column; /* 垂直排列按钮 */
             padding: 20px;
             box-sizing: border-box;
+            overflow-y: auto; /* 内容超出时允许滚动 */
         }
 
         /* 返回按钮 */
@@ -156,6 +158,22 @@
                 font-size: 10px; /* 在小屏幕上减少页脚字体大小 */
             }
         }
+
+        /* 页脚 */
+        #footer {
+            height: 80px;
+            line-height: 40px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3); /* 半透明背景 */
+            color: #A0A0A0;
+            font-size: 12px;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+        }
     </style>
     <link rel="icon" href="/444">
 </head>
@@ -189,9 +207,9 @@
             </a>
         </div>
         <br/><br/>
-        <!-- 新增的返回按钮 -->
+        <!-- 新增返回按钮 -->
         <div class="acrylic-button-wrapper">
-            <a href="javascript:history.back()">
+            <a href="javascript:history.back();">
                 <button class="back-button">返回</button>
             </a>
         </div>
@@ -237,4 +255,3 @@
 
 </body>
 </html>
-
