@@ -198,6 +198,27 @@
         .dark-mode .task-text {
             color: #fff;
         }
+
+        /* WinUI 3 返回按钮样式 */
+        .winui-back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background-color: #0078d4; /* WinUI 3 颜色 */
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .winui-back-button:hover {
+            background-color: #005a8a;
+        }
     </style>
 </head>
 <body>
@@ -237,6 +258,9 @@
             <span id="clock"></span>
         </footer>
     </div>
+
+    <!-- WinUI 3 风格的返回按钮 -->
+    <button class="winui-back-button" onclick="window.history.back();">返回</button>
 
     <script>
         // 时钟功能
