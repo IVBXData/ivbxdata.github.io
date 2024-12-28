@@ -58,7 +58,7 @@
             animation: slideUp 1s ease-out;
             position: relative;
             margin-top: 60px;
-            z-index: 2000; /* 提高 z-index，确保在其他元素上层 */
+            z-index: 1000; /* 确保计算器本身处于中间层 */
         }
 
         @keyframes slideUp {
@@ -158,11 +158,12 @@
             background-color: #e68a00;
         }
 
+        /* 历史记录弹窗 */
         .history-modal {
-            position: fixed;
-            top: 50%;
+            position: absolute;
+            top: 0; /* 使其在计算器容器的顶部 */
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             background-color: white;
             padding: 30px;
             border-radius: 10px;
@@ -171,6 +172,7 @@
             max-height: 70vh;
             overflow-y: auto;
             width: 350px;
+            z-index: 1004; /* 历史记录窗口的 z-index 设置为 1004 */
         }
 
         .history-modal h2 {
@@ -178,6 +180,7 @@
             margin-bottom: 15px;
             font-size: 1.5em;
             color: #0078D4;
+            cursor: move; /* 使标题栏可以拖动 */
         }
 
         .history-modal ul {
@@ -209,13 +212,11 @@
             background-color: #005A8A;
         }
 
-        /* 返回按钮容器，调整为页面底部居中 */
+        /* 返回按钮容器 */
         .back-button-container {
-            position: fixed;
-            bottom: 20px; /* 固定在底部 */
-            left: 50%; /* 居中 */
-            transform: translateX(-50%); /* 完全居中 */
-            z-index: 1000;
+            position: relative; /* 将其从固定位置更改为相对位置 */
+            z-index: 999; /* 确保它位于计算器下方 */
+            margin-top: 20px; /* 为按钮和计算器之间添加间距 */
         }
 
         /* 返回按钮样式 */
@@ -347,6 +348,45 @@
         function goBack() {
             window.history.back();
         }
+
+        // 使历史记录窗口仅顶部部分可拖动
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        const dragElement = document.querySelector('.history-modal h2'); // 只允许标题拖动
+
+        dragElement.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            offsetX = e.clientX - historyModal.getBoundingClientRect().left;
+            offsetY = e.clientY - historyModal.getBoundingClientRect().top;
+            document.body.style.cursor = 'move';
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                let newLeft = e.clientX - offsetX;
+                let newTop = e.clientY - offsetY;
+
+                // 限制拖动区域
+                const minX = 0;
+                const maxX = window.innerWidth - historyModal.offsetWidth;
+                const minY = 0;
+                const maxY = window.innerHeight - historyModal.offsetHeight;
+
+                if (newLeft < minX) newLeft = minX;
+                if (newLeft > maxX) newLeft = maxX;
+                if (newTop < minY) newTop = minY;
+                if (newTop > maxY) newTop = maxY;
+
+                historyModal.style.left = `${newLeft}px`;
+                historyModal.style.top = `${newTop}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+            document.body.style.cursor = 'default';
+        });
     </script>
 
 </body>
