@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <title>IVBX Server</title>
     <style type="text/css">
-        /* 去除滚动条 */
+        /* 样式 */
         html, body {
             height: 100%; /* 确保页面的高度填满整个视口 */
             margin: 0;
@@ -13,7 +13,6 @@
             overflow: hidden; /* 去除滚动条 */
         }
 
-        /* 背景与整体页面样式 */
         body {
             background-image: url('index'); /* 背景图 */
             background-repeat: no-repeat;
@@ -62,9 +61,19 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 适当的阴影效果 */
         }
 
+        /* 内容区域，确保按钮居中 */
+        .content {
+            height: calc(100vh - 160px); /* 内容区域占满剩余空间 */
+            width: 100%;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            flex-direction: column; /* 垂直排列按钮 */
+        }
+
         /* 页脚 */
         #footer {
-            height: 40px;
+            height: 80px;
             line-height: 40px;
             position: fixed;
             bottom: 0;
@@ -73,14 +82,9 @@
             background: rgba(0, 0, 0, 0.3); /* 半透明背景 */
             color: #A0A0A0;
             font-size: 12px;
-        }
-
-        /* 内容区域 */
-        .content {
-            height: calc(100vh - 160px); /* 内容区域占满剩余空间 */
-            width: 100%;
-            text-align: center;
-            padding-top: 20px;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
         }
 
         /* 按钮样式，模仿WinUI 3风格 */
@@ -89,58 +93,76 @@
             backdrop-filter: blur(10px); /* 背景模糊效果 */
             border: none;
             color: #0078D4; /* 按钮文字改为蓝色 */
-            padding: 15px 32px;
+            padding: 12px 20px;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
             font-size: 16px;
             margin: 10px;
             cursor: pointer;
             border-radius: 10px; /* 圆角按钮 */
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s; /* 按钮过渡效果 */
         }
 
+        /* 按钮悬停效果 */
         .acrylic-button:hover {
-            background: rgba(0, 120, 215, 0.3); /* 悬浮时背景颜色 */
-            transform: scale(1.05); /* 按钮放大 */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* 增加阴影 */
+            background: rgba(0, 120, 215, 0.2); /* 悬停时背景颜色 */
+            transform: scale(1.05); /* 悬停时稍微放大按钮 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
         }
 
+        /* 按钮点击效果 */
         .acrylic-button:active {
-            transform: scale(0.95); /* 按钮点击时缩小 */
-            background: rgba(0, 120, 215, 0.5); /* 点击时的背景颜色 */
+            transform: scale(0.98); /* 按钮点击时缩小 */
+            background: rgba(0, 120, 215, 0.4); /* 点击时背景颜色 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 点击时阴影变化 */
         }
 
-        /* 时钟加载动画 */
-        .loading {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            margin: 0 2px;
-            background-color: #0078D4; /* 蓝色 */
-            border-radius: 50%;
-            animation: loading 1s infinite alternate;
+        /* 返回按钮，居中显示在页面上 */
+        #backButton {
+            position: fixed;
+            bottom: 160px; /* 离页面底部160px，确保不与页脚重叠 */
+            left: calc(50% - 35px); /* 将返回按钮向左移动15px */
+            transform: translateX(-50%); /* 精确居中 */
+            background: rgba(255, 255, 255, 0.2); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 背景模糊效果 */
+            color: #0078D4;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s, opacity 0.3s; /* 添加渐变过渡 */
+            opacity: 0; /* 初始时设置为透明 */
+            animation: fadeInUp 0.8s forwards; /* 动画效果 */
         }
 
-        .loading:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes loading {
+        /* 返回按钮渐显动画 */
+        @keyframes fadeInUp {
             from {
-                transform: scale(1);
-                background-color: #0078D4; /* 蓝色 */
+                transform: translateY(50px); /* 初始位置 */
+                opacity: 0;
             }
             to {
-                transform: scale(1.5);
-                background-color: #005A9E; /* 深蓝色 */
+                transform: translateY(0); /* 最终位置 */
+                opacity: 1;
             }
         }
+
+        /* 返回按钮悬停效果 */
+        #backButton:hover {
+            background: rgba(0, 120, 215, 0.2); /* 悬停时改变背景颜色 */
+            transform: scale(1.05); /* 悬停时按钮放大 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+        }
+
+        /* 返回按钮点击效果 */
+        #backButton:active {
+            transform: scale(0.98); /* 按钮点击时缩小 */
+            background: rgba(0, 120, 215, 0.4); /* 点击时的背景颜色 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 点击时阴影变化 */
+        }
+
     </style>
     <link rel="icon" href="/444">
 </head>
@@ -173,20 +195,26 @@
                 <button class="acrylic-button">CverNate OS</button>
             </a>
         </div>
+        <br/><br/>
+        <button id="backButton" onclick="goBack()">返回</button>
     </div>
 
     <!-- 页脚 -->
     <footer id="footer">&copy; <span id="footer-year">2025</span> Hyper Windst0rm</footer>
 
     <script type="text/javascript">
+        function goBack() {
+            window.history.back(); // 返回上一页
+        }
+
         var days = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
 
         function goTime() {
             var time = new Date();
             var year = time.getFullYear();
-            var month = time.getMonth() + 1; // 返回0-11, 所以+1
+            var month = time.getMonth() + 1;
             var date = time.getDate();
-            var day = time.getDay(); // 返回0-6
+            var day = time.getDay();
             var hour = time.getHours();
             var minute = time.getMinutes();
             var second = time.getSeconds();
