@@ -68,40 +68,21 @@
             transition: opacity 1s ease;
         }
 
-        /* 任务栏升起动画 */
-        @keyframes taskbarRiseUp {
-            from {
-                transform: translateY(100%);
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
-
-        /* 开始按钮升起动画 */
-        @keyframes startButtonRiseUp {
-            from {
-                transform: translateY(100%);
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
-
         /* 任务栏 */
         .taskbar {
             background: rgba(255, 255, 255, 0.5); /* 半透明白色背景 */
             position: fixed;
             bottom: 0;
+            left: 50%; /* 确保任务栏居中 */
+            transform: translateX(-50%); /* 使任务栏居中 */
             width: 100%;
             height: 60px;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
             padding: 0 20px;
             z-index: 105; /* 将任务栏层级设置为高于开始菜单 */
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            animation: taskbarRiseUp 0.5s ease-out; /* 应用升起动画 */
             backdrop-filter: blur(10px); /* 添加模糊效果 */
         }
 
@@ -156,7 +137,7 @@
             display: none;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             z-index: 104; /* 确保开始菜单的层级高于页脚 */
-            animation: scaleIn 0.3s ease-out forwards; /* 应用缩放动画 */
+            animation: scaleIn 0.3s ease-out forwards; /* 应用缩放和上下移动动画 */
             text-align: center;
             overflow-y: auto;
             backdrop-filter: blur(10px); /* 添加模糊效果 */
@@ -166,21 +147,21 @@
         @keyframes scaleIn {
             from {
                 opacity: 0;
-                transform: translateX(-50%) scale(0); /* 初始状态为透明并缩小 */
+                transform: translateY(80px) translateX(-50%) scale(0); /* 初始状态为透明、向下偏移80px并缩小 */
             }
             to {
                 opacity: 1;
-                transform: translateX(-50%) scale(1); /* 完全展开 */
+                transform: translateY(0) translateX(-50%) scale(1); /* 完全展开且无偏移 */
             }
         }
 
         /* 开始菜单移出动画 */
         @keyframes scaleOut {
             from {
-                transform: translateX(-50%) scale(1); /* 完全展开 */
+                transform: translateY(0) translateX(-50%) scale(1); /* 完全展开 */
             }
             to {
-                transform: translateX(-50%) scale(0); /* 缩小到 0 */
+                transform: translateY(80px) translateX(-50%) scale(0); /* 缩小并向下偏移80px */
             }
         }
 
@@ -231,26 +212,24 @@
             background: #e0e0e0;
         }
 
-        /* 搜索框和按钮样式 */
+        /* 搜索框样式 */
         .search-container {
             display: flex;
-            width: 100%;
             margin-bottom: 20px;
-            justify-content: center;
         }
 
         .search-bar {
-            padding: 10px;
-            width: 60%;
-            font-size: 1.2em;
-            border-radius: 5px;
+            width: 100%;
+            padding: 8px;
+            font-size: 1em;
             border: 1px solid #ccc;
+            border-radius: 5px;
             margin-right: 10px;
         }
 
         .search-button {
-            padding: 10px 15px;
-            font-size: 1.2em;
+            padding: 8px 15px;
+            font-size: 1em;
             border-radius: 5px;
             background: #0078D4;
             color: #fff;
@@ -369,5 +348,4 @@
     </script>
 </body>
 </html>
-
 
