@@ -15,8 +15,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* 确保页面高度至少为100vh */
             overflow: hidden;
+            flex-direction: column; /* 确保主体内容与页脚之间的布局 */
         }
 
         .container {
@@ -28,6 +29,7 @@
             max-width: 900px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: left;
+            margin-bottom: 50px; /* 给底部留出空间，防止内容过长时被页脚覆盖 */
         }
 
         h1, h2 {
@@ -78,10 +80,36 @@
         }
 
         footer {
-            margin-top: 30px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
             text-align: center;
             font-size: 12px;
             color: #A0A0A0;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 浮动按钮的样式 */
+        .test-page-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .test-page-btn:hover {
+            background-color: #005A8A;
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -110,6 +138,9 @@
     </div>
 
     <footer>&copy; <span id="footer-year"></span> Hyper Windst0rm</footer>
+
+    <!-- 测试页面按钮 -->
+    <a href="https://ivbxdata.github.io/Dev/" class="test-page-btn" target="_blank">测试页面</a>
 
     <script type="text/javascript">
         // 动态更新时间戳
