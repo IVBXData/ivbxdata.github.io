@@ -111,6 +111,19 @@
             background-color: #005A8A;
             transform: scale(1.1);
         }
+
+        /* 移动设备优化 */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .test-page-btn {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -148,4 +161,5 @@
     </script>
 </body>
 </html>
+
 
