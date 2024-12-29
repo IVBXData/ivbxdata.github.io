@@ -1,1 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>IVBX Server</title>
+
+    <!-- 添加网站图标 -->
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+
+    <style type="text/css">
+        /* 禁止滚动条 */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('index'); /* 确保图片路径正确 */
+            background-size: cover;
+            background-position: center;
+            overflow: hidden; /* 禁止滚动条 */
+            position: relative;
+        }
+
+        /* 头部标题动画 */
+        header {
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
+            text-align: center;
+            position: relative;
+            z-index: 102;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #0078D4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 点击开始后淡出文字 */
+        .start-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            z-index: 101;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        /* 任务栏升起动画 */
+        @keyframes taskbarRiseUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* 开始按钮升起动画 */
+        @keyframes startButtonRiseUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* 任务栏 */
+        .taskbar {
+            background: rgba(255, 255, 255, 0.5); /* 半透明白色背景 */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 105; /* 将任务栏层级设置为高于开始菜单 */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            animation: taskbarRiseUp 0.5s ease-out; /* 应用升起动画 */
+            backdrop-filter: blur(10px); /* 添加模糊效果 */
+        }
+
+        /* 开始菜单按钮（圆角正方形） */
+        .start-menu-button {
+            background: transparent; /* 默认背景色透明，与页面背景一致 */
+            border: none;
+            border-radius: 10px; /* 较小的圆角 */
+            width: 50px; /* 正方形按钮 */
+            height: 50px; /* 正方形按钮 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: startButtonRiseUp 0.5s ease-out; /* 为开始按钮添加升起动画 */
+        }
+
+        /* 设置开始按钮内的图标大小 */
+        .start-menu-button img {
+            width: 25px;
+            height: 25px;
+        }
+
+        /* 开始菜单按钮悬浮效果 */
+        .start-menu-button:hover {
+            background: #005A8A; /* 悬浮时变蓝 */
+            transform: scale(1.1); /* 鼠标悬停时放大 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 增加阴影 */
+        }
+
+        /* 开始菜单按钮点击效果 */
+        .start-menu-button:active {
+            transform: scale(0.95); /* 点击时缩小 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 减小阴影 */
+            background: #004C77; /* 点击时背景变暗 */
+        }
+
+        /* 开始菜单 */
+        .start-menu {
+            position: fixed;
+            bottom: 80px; /* 改为距离任务栏80px */
+            left: 50%;
+            transform: translateX(-50%); /* 初始状态不使用 scale */
+            width: 80vw; /* 动态宽度为视口宽度的80% */
+            max-width: 600px; /* 最大宽度为600px */
+            height: calc(100vh - 180px); /* 减去头部和任务栏的高度 */
+            max-height: 70vh; /* 最大高度 */
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 104; /* 确保开始菜单的层级高于页脚 */
+            animation: scaleIn 0.3s ease-out forwards; /* 应用缩放动画 */
+            text-align: center;
+            overflow-y: auto;
+            backdrop-filter: blur(10px); /* 添加模糊效果 */
+            transform-origin: bottom center; /* 从底部中央开始缩放 */
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) scale(0); /* 初始状态为透明并缩小 */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) scale(1); /* 完全展开 */
+            }
+        }
+
+        /* 开始菜单移出动画 */
+        @keyframes scaleOut {
+            from {
+                transform: translateX(-50%) scale(1); /* 完全展开 */
+            }
+            to {
+                transform: translateX(-50%) scale(0); /* 缩小到 0 */
+            }
+        }
+
+        .start-menu h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #0078D4;
+        }
+
+        .start-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* WinUI 3 风格按钮 */
+        .acrylic-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #0078D4;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            margin-bottom: 12px;
+        }
+
+        .acrylic-button:hover {
+            background: rgba(0, 120, 212, 0.2);
+            transform: scale(1.05);
+        }
+
+        .start-menu ul li {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f2f2f2;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .start-menu ul li:hover {
+            background: #e0e0e0;
+        }
+
+        /* 搜索框和按钮样式 */
+        .search-container {
+            display: flex;
+            width: 100%;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .search-bar {
+            padding: 10px;
+            width: 60%;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            padding: 10px 15px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            background: #0078D4;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background: #005A8A;
+        }
+
+        /* 页脚 */
+        #footer {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: transparent;
+            color: #2F4F4F;
+            font-family: Arial;
+            font-size: 12px;
+            letter-spacing: 1px;
+            position: fixed;
+            bottom: 60px; /* 页脚位置在开始按钮上方 */
+            width: 100%;
+            z-index: 100; /* 页脚层级低于开始菜单 */
+        }
+
+        /* 针对触摸设备优化 */
+        @media (hover: none) and (pointer: coarse) {
+            /* 触摸设备的按钮放大效果 */
+            .start-menu-button:active {
+                transform: scale(1.2); /* 点击时放大 */
+            }
+
+            /* 触摸设备上的按钮缩放效果 */
+            .start-menu-button {
+                transition: transform 0.3s ease;
+                transform-origin: center center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IVBX Server</h1>
+    </header>
+
+    <!-- 背景文字 -->
+    <div class="start-text" id="startText">点击开始</div>
+
+    <!-- 开始菜单 -->
+    <div class="start-menu" id="startMenu">
+        <h3>开始</h3>
+
+        <!-- 搜索框 -->
+        <form action="https://www.bing.com/search" method="get">
+            <div class="search-container">
+                <input type="text" name="q" class="search-bar" placeholder="请输入搜索内容..." />
+                <button type="submit" class="search-button">搜索</button>
+            </div>
+        </form>
+
+        <ul>
+            <li><a href="Downloads"><button class="acrylic-button">下载相关文件</button></a></li>
+            <li><a href="Teams"><button class="acrylic-button">查看WinBetaMUI Team</button></a></li>
+            <li><a href="Notes"><button class="acrylic-button">私人便利贴</button></a></li>
+            <li><a href="Calculator"><button class="acrylic-button">网页计算器</button></a></li>
+        </ul>
+    </div>
+
+    <!-- 任务栏 -->
+    <div class="taskbar">
+        <button class="start-menu-button" onclick="toggleStartMenu()">
+            <img src="icon.png" alt="Start Menu Icon">
+        </button>
+    </div>
+
+    <h4 id="footer">&copy; <span id="year"></span> Hyper Windst0rm</h4>
+
+    <script>
+        // 显示/隐藏开始菜单
+        function toggleStartMenu() {
+            var menu = document.getElementById('startMenu');
+            var button = document.querySelector('.start-menu-button');
+            var startText = document.getElementById('startText');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+                menu.style.animation = 'scaleIn 0.3s ease-out';
+                button.classList.add('active');
+                startText.style.opacity = '0';  // 淡出背景文字
+            } else {
+                menu.style.animation = 'scaleOut 0.3s ease-out';
+                setTimeout(function() {
+                    menu.style.display = 'none';
+                }, 300);
+                button.classList.remove('active');
+            }
+        }
+
+        // 点击空白区域收起菜单
+        window.addEventListener('click', function(event) {
+            var menu = document.getElementById('startMenu');
+            var button = document.querySelector('.start-menu-button');
+            var startText = document.getElementById('startText');
+            if (!menu.contains(event.target) && !button.contains(event.target)) {
+                menu.style.animation = 'scaleOut 0.3s ease-out';
+                setTimeout(function() {
+                    menu.style.display = 'none';
+                }, 300);
+                button.classList.remove('active');
+            }
+        });
+
+        // 自动更新页脚年份
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
+
 
