@@ -131,6 +131,11 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 增加阴影 */
         }
 
+        /* 开始按钮点击时的缩放效果 */
+        .start-menu-button:active {
+            transform: scale(0.9); /* 鼠标点击时缩小 */
+        }
+
         /* 开始菜单 */
         .start-menu {
             position: fixed;
@@ -224,21 +229,19 @@
 
         .acrylic-button:hover {
             background: #0078D4;
-            color: #fff;
-            transform: scale(1.05);
+            color: #fff; /* 鼠标悬停时颜色变化 */
         }
 
         /* 搜索框 */
         .search-container {
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .search-bar {
-            width: 100%; /* 确保搜索框自适应宽度 */
-            max-width: 300px; /* 设置最大宽度 */
+            width: 100%;
+            max-width: 300px;
             padding: 10px;
             font-size: 1em;
             border-radius: 5px;
@@ -278,7 +281,7 @@
         /* 移动设备优化 */
         @media (max-width: 768px) {
             .start-menu {
-                width: 90%; /* 更小的屏幕宽度占更大的视口比例 */
+                width: 90%;
             }
 
             .start-menu-button {
@@ -308,7 +311,7 @@
         /* 在触摸屏设备上增加按动缩放效果 */
         @media (hover: none) and (pointer: coarse) {
             .start-menu-button:active {
-                transform: scale(0.9); /* 按下时缩小到90% */
+                transform: scale(0.9);
             }
         }
     </style>
@@ -320,7 +323,6 @@
 
     <div class="start-text" id="startText">点击开始</div>
 
-    <!-- 开始菜单 -->
     <div class="start-menu" id="startMenu">
         <h3>开始</h3>
         <form action="https://www.bing.com/search" method="get">
@@ -353,14 +355,14 @@
             if (menu.style.display === 'none' || menu.style.display === '') {
                 menu.style.display = 'block';
                 menu.style.animation = 'scaleIn 0.3s ease-out';
-                button.classList.add('active'); // 添加active类
+                button.classList.add('active');
                 startText.style.opacity = '0'; 
             } else {
                 menu.style.animation = 'scaleOut 0.3s ease-out';
                 setTimeout(function() {
                     menu.style.display = 'none';
                 }, 300);
-                button.classList.remove('active'); // 移除active类
+                button.classList.remove('active');
             }
         }
 
@@ -373,7 +375,7 @@
                 setTimeout(function() {
                     menu.style.display = 'none';
                 }, 300);
-                button.classList.remove('active'); // 移除active类
+                button.classList.remove('active');
             }
         });
 
