@@ -192,6 +192,9 @@
             border-radius: 10px; /* 给容器添加圆角 */
             padding: 10px;
             backdrop-filter: blur(10px); /* 模糊效果 */
+            display: grid; /* 使用网格布局 */
+            grid-template-columns: repeat(2, 1fr); /* 每行两个按钮 */
+            gap: 15px; /* 按钮之间的间隔 */
         }
 
         .start-menu ul li {
@@ -201,27 +204,40 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center; /* 图标与文字垂直居中 */
+            justify-content: center; /* 图标和文本水平居中 */
+        }
+
+        .start-menu ul li img {
+            margin-right: 10px; /* 图标与文字之间的间距 */
+            width: 20px;
+            height: 20px;
         }
 
         .start-menu ul li:hover {
             background: #fff; /* 背景色为白色 */
-            color: #0078D4; /* 文本颜色改为蓝色 */
+            color: #0078D4; /* 文字颜色 */
         }
 
-        /* WinUI 3 风格按钮 */
+        /* 去除链接的下划线 */
+        .start-menu ul li a {
+            text-decoration: none; /* 去除文字下划线 */
+        }
+
         .acrylic-button {
-            background: #fff; /* 背景色为白色 */
-            border: none;
-            color: #000; /* 设置按钮文字颜色为黑色 */
             padding: 10px 20px;
-            font-size: 1.1em;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
+            background: rgba(255, 255, 255, 0.6); /* 半透明白色背景 */
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.2s ease; /* 按钮缩放和背景色变化 */
+            font-size: 1em;
+            color: #0078D4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
         }
 
         .acrylic-button:active {
@@ -334,10 +350,10 @@
             </div>
         </form>
         <ul>
-            <li><a href="Downloads"><button class="acrylic-button">下载相关文件</button></a></li>
-            <li><a href="Teams"><button class="acrylic-button">查看WinBetaMUI Team</button></a></li>
-            <li><a href="Notes"><button class="acrylic-button">私人便利贴</button></a></li>
-            <li><a href="Calculator"><button class="acrylic-button">网页计算器</button></a></li>
+            <li><a href="Downloads"><button class="acrylic-button"><img src="download-icon.png" alt="下载">下载相关文件</button></a></li>
+            <li><a href="Teams"><button class="acrylic-button"><img src="team-icon.png" alt="团队">查看WinBetaMUI Team</button></a></li>
+            <li><a href="Notes"><button class="acrylic-button"><img src="note-icon.png" alt="便签">私人便利贴</button></a></li>
+            <li><a href="Calculator"><button class="acrylic-button"><img src="calc-icon.png" alt="计算器">网页计算器</button></a></li>
         </ul>
     </div>
 
@@ -385,6 +401,11 @@
     </script>
 </body>
 </html>
+
+
+
+
+
 
 
 
