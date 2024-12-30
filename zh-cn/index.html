@@ -304,6 +304,13 @@
                 width: 80%;
             }
         }
+
+        /* 在触摸屏设备上增加按动缩放效果 */
+        @media (hover: none) and (pointer: coarse) {
+            .start-menu-button:active {
+                transform: scale(0.9); /* 按下时缩小到90% */
+            }
+        }
     </style>
 </head>
 <body>
@@ -374,6 +381,7 @@
     </script>
 </body>
 </html>
+
 
 
 
