@@ -333,6 +333,9 @@
             }
         }
     </style>
+
+<link rel="manifest" href="manifest.json">
+
 </head>
 <body>
     <header>
@@ -398,6 +401,18 @@
         });
 
         document.getElementById('year').textContent = new Date().getFullYear();
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker 注册成功:', registration);
+        })
+        .catch((error) => {
+          console.log('Service Worker 注册失败:', error);
+        });
+    });
+  }
     </script>
 </body>
 </html>
