@@ -1,324 +1,331 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <title>IVBX Server</title>
-    <link rel="icon" href="icon.ico" type="image/x-icon">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="index.css">
+<title>IVBX Server</title>
+<link rel="icon" href="icon.ico" type="image/x-icon">
 
-    <style type="text/css">
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('index');
-            background-size: cover;
-            background-position: center;
-            overflow: hidden;
-            position: relative;
-        }
+<style type="text/css">
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('index');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+}
 
-        header {
-            padding: 20px 0;
-            background-color: rgba(0, 0, 0, 0.1);
-            animation: slideIn 1s ease-out;
-            text-align: center;
-            position: relative;
-            z-index: 102;
-        }
+header {
+    padding: 20px 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s ease-out;
+    text-align: center;
+    position: relative;
+    z-index: 102;
+}
 
-        @keyframes slideIn {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+@keyframes slideIn {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-            color: #0078D4;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #0078D4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-        .start-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2em;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-            z-index: 101;
-            opacity: 1;
-            transition: opacity 1s ease;
-        }
+.start-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    z-index: 101;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
 
-        /* 时间显示更大，位置更高 */
-        .time-display {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4em;
-            color: #ffffff;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
-            z-index: 101;
-            transition: opacity 0.5s ease;
-        }
+.time-display {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4em;
+    color: #ffffff;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+    z-index: 101;
+    transition: opacity 0.5s ease-in-out;
+}
 
-        .taskbar {
-            background: rgba(255, 255, 255, 0.5);
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 20px;
-            z-index: 105;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            animation: riseUp 1s ease-out forwards;
-        }
+.taskbar {
+    background: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 105;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    animation: riseUp 1s ease-out forwards;
+}
 
-        @keyframes riseUp {
-            from { transform: translateY(100px) translateX(-50%); opacity: 0; }
-            to { transform: translateY(0) translateX(-50%); opacity: 1; }
-        }
+@keyframes riseUp {
+    from { transform: translateY(100px) translateX(-50%); opacity: 0; }
+    to { transform: translateY(0) translateX(-50%); opacity: 1; }
+}
 
-        .start-menu-button {
-            background: transparent;
-            border: none;
-            border-radius: 10px;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 106;
-        }
+.start-menu-button {
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 106;
+}
 
-        .start-menu-button img { width: 25px; height: 25px; }
+.start-menu-button img { width: 25px; height: 25px; }
 
-        .start-menu-button.active { background: #0078D4; }
-        .start-menu-button:hover {
-            background: #005A8A;
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-        .start-menu-button:active { transform: scale(0.9); }
+.start-menu-button.active { background: #0078D4; }
+.start-menu-button:hover {
+    background: #005A8A;
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.start-menu-button:active { transform: scale(0.9); }
 
-        /* 开始菜单 + 非线性展开动画 */
-        .start-menu {
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80vw;
-            max-width: 600px;
-            height: calc(100vh - 180px);
-            max-height: 70vh;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            padding: 20px;
-            display: none;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            z-index: 104;
-            animation: scaleIn 0.3s ease-in-out forwards; /* 改为非线性 */
-            text-align: center;
-            overflow-y: auto;
-            backdrop-filter: blur(10px);
-            transform-origin: bottom center;
-        }
+.start-menu {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw;
+    max-width: 600px;
+    height: calc(100vh - 180px);
+    max-height: 70vh;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    display: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 104;
+    text-align: center;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+    transform-origin: bottom center;
+}
 
-        @keyframes scaleIn {
-            from { transform: translateY(80px) translateX(-50%) scale(0); }
-            to { transform: translateY(0) translateX(-50%) scale(1); }
-        }
+@keyframes scaleIn {
+    from { transform: translateY(80px) translateX(-50%) scale(0); }
+    to { transform: translateY(0) translateX(-50%) scale(1); }
+}
 
-        @keyframes scaleOut {
-            from { transform: translateY(0) translateX(-50%) scale(1); }
-            to { transform: translateY(80px) translateX(-50%) scale(0); }
-        }
+@keyframes scaleOut {
+    from { transform: translateY(0) translateX(-50%) scale(1); }
+    to { transform: translateY(80px) translateX(-50%) scale(0); }
+}
 
-        .start-menu h3 { font-size: 1.8em; margin-bottom: 15px; color: #0078D4; }
+.start-menu h3 { font-size: 1.8em; margin-bottom: 15px; color: #0078D4; }
 
-        .start-menu ul {
-            list-style: none;
-            padding: 0;
-            background-color: rgba(255, 255, 255, 0.6);
-            border-radius: 10px;
-            padding: 10px;
-            backdrop-filter: blur(10px);
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
+.start-menu ul {
+    list-style: none;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
 
-        .start-menu ul li {
-            padding: 12px;
-            margin: 8px 0;
-            background: #f2f2f2;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.start-menu ul li {
+    padding: 12px;
+    margin: 8px 0;
+    background: #f2f2f2;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .start-menu ul li img { margin-right: 10px; width: 20px; height: 20px; }
-        .start-menu ul li:hover { background: #fff; color: #0078D4; }
-        .start-menu ul li a { text-decoration: none; }
+.start-menu ul li img { margin-right: 10px; width: 20px; height: 20px; }
+.start-menu ul li:hover { background: #fff; color: #0078D4; }
+.start-menu ul li a { text-decoration: none; }
 
-        .acrylic-button {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.6);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            color: #0078D4;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        .acrylic-button:active { transform: scale(0.95); }
-        .acrylic-button:hover { background: #0078D4; color: #fff; }
+.acrylic-button {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #0078D4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.acrylic-button:active { transform: scale(0.95); }
+.acrylic-button:hover { background: #0078D4; color: #fff; }
 
-        .search-container { display: flex; align-items: center; justify-content: center; width: 100%; }
-        .search-bar {
-            width: 70%; max-width: 250px; padding: 10px; font-size: 1em;
-            border-radius: 5px; border: 1px solid #ccc;
-        }
-        .search-button {
-            padding: 10px 20px; background: #0078D4; color: #fff;
-            border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;
-        }
-        .search-button:hover { background: #005A8A; }
+.search-container { display: flex; align-items: center; justify-content: center; width: 100%; }
+.search-bar {
+    width: 70%; max-width: 250px; padding: 10px; font-size: 1em;
+    border-radius: 5px; border: 1px solid #ccc;
+}
+.search-button {
+    padding: 10px 20px; background: #0078D4; color: #fff;
+    border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;
+}
+.search-button:hover { background: #005A8A; }
 
-        #footer {
-            height: 40px; line-height: 40px; text-align: center; background: transparent;
-            color: #2F4F4F; font-family: Arial; font-size: 12px; letter-spacing: 1px;
-            position: fixed; bottom: 60px; width: 100%; z-index: 100;
-        }
+#footer {
+    height: 40px; line-height: 40px; text-align: center; background: transparent;
+    color: #2F4F4F; font-family: Arial; font-size: 12px; letter-spacing: 1px;
+    position: fixed; bottom: 60px; width: 100%; z-index: 100;
+}
 
-        @media (max-width: 768px) {
-            .start-menu { width: 90%; }
-            .start-menu-button { width: 45px; height: 45px; }
-            .start-menu-button img { width: 20px; height: 20px; }
-            h1 { font-size: 2em; }
-            .acrylic-button { padding: 8px 15px; font-size: 1em; }
-            .search-bar { width: 80%; }
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            .start-menu-button:active { transform: scale(0.9); }
-        }
-    </style>
-
-    <link rel="manifest" href="manifest.json">
+@media (max-width: 768px) {
+    .start-menu { width: 90%; }
+    .start-menu-button { width: 45px; height: 45px; }
+    .start-menu-button img { width: 20px; height: 20px; }
+    h1 { font-size: 2em; }
+    .acrylic-button { padding: 8px 15px; font-size: 1em; }
+    .search-bar { width: 80%; }
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1>IVBX Server</h1>
-    </header>
+<header>
+<h1>IVBX Server</h1>
+</header>
 
-    <div class="time-display" id="timeDisplay"></div>
-    <div class="start-text" id="startText">单击按钮开始</div>
+<div class="time-display" id="timeDisplay"></div>
+<div class="start-text" id="startText">单击按钮开始</div>
 
-    <div class="start-menu" id="startMenu">
-        <h3>开始</h3>
-        <form action="https://www.bing.com/search" method="get">
-            <div class="search-container">
-                <input type="text" name="q" class="search-bar" placeholder="键入并搜索内容..." />
-                <button type="submit" class="search-button">搜索</button>
-            </div>
-        </form>
-        <ul>
-            <li><a href="Downloads"><button class="acrylic-button"><img src="download-icon.png" alt="下载">下载相关文件</button></a></li>
-            <li><a href="Teams"><button class="acrylic-button"><img src="team-icon.png" alt="团队">查看WinBetaMUI Team</button></a></li>
-            <li><a href="Notes"><button class="acrylic-button"><img src="note-icon.png" alt="便签">私人便利贴</button></a></li>
-            <li><a href="Calculator"><button class="acrylic-button"><img src="calc-icon.png" alt="计算器">网页计算器</button></a></li>
-        </ul>
+<div class="start-menu" id="startMenu">
+<h3>开始</h3>
+<form action="https://www.bing.com/search" method="get">
+    <div class="search-container">
+        <input type="text" name="q" class="search-bar" placeholder="键入并搜索内容..." />
+        <button type="submit" class="search-button">搜索</button>
     </div>
+</form>
+<ul>
+    <li><a href="Downloads"><button class="acrylic-button"><img src="download-icon.png" alt="下载">下载相关文件</button></a></li>
+    <li><a href="Teams"><button class="acrylic-button"><img src="team-icon.png" alt="团队">查看WinBetaMUI Team</button></a></li>
+    <li><a href="Notes"><button class="acrylic-button"><img src="note-icon.png" alt="便签">私人便利贴</button></a></li>
+    <li><a href="Calculator"><button class="acrylic-button"><img src="calc-icon.png" alt="计算器">网页计算器</button></a></li>
+</ul>
+</div>
 
-    <div class="taskbar">
-        <button class="start-menu-button" onclick="toggleStartMenu()">
-            <img src="icon.png" alt="Start Menu Icon">
-        </button>
-    </div>
+<div class="taskbar">
+<button class="start-menu-button">
+    <img src="icon.png" alt="Start Menu Icon">
+</button>
+</div>
 
-    <h4 id="footer">&copy; <span id="year"></span> Hyper St0rm</h4>
+<h4 id="footer">&copy; <span id="year"></span> Hyper St0rm</h4>
 
-    <script>
-        function toggleStartMenu() {
-            var menu = document.getElementById('startMenu');
-            var button = document.querySelector('.start-menu-button');
-            var startText = document.getElementById('startText');
-            var timeDisplay = document.getElementById('timeDisplay');
-            if (menu.style.display === 'none' || menu.style.display === '') {
-                menu.style.display = 'block';
-                menu.style.animation = 'scaleIn 0.4s ease-in-out';
-                button.classList.add('active');
-                startText.style.opacity = '0'; 
-                timeDisplay.style.opacity = '0';
-            } else {
-                menu.style.animation = 'scaleOut 0.3s ease-in-out';
-                setTimeout(function() { menu.style.display = 'none'; }, 300);
-                button.classList.remove('active');
-                timeDisplay.style.opacity = '1';
-            }
-        }
+<script>
+let isMenuOpen = false;
+const menu = document.getElementById('startMenu');
+const button = document.querySelector('.start-menu-button');
+const startText = document.getElementById('startText');
+const timeDisplay = document.getElementById('timeDisplay');
+let animationTimeout = null;
 
-        window.addEventListener('click', function(event) {
-            var menu = document.getElementById('startMenu');
-            var button = document.querySelector('.start-menu-button');
-            var startText = document.getElementById('startText');
-            var timeDisplay = document.getElementById('timeDisplay');
-            if (!menu.contains(event.target) && !button.contains(event.target)) {
-                menu.style.animation = 'scaleOut 0.3s ease-in-out';
-                setTimeout(function() { menu.style.display = 'none'; }, 300);
-                button.classList.remove('active');
-                timeDisplay.style.opacity = '1';
-            }
-        });
+// 清理动画，支持动画打断
+function clearAnimations() {
+    if (animationTimeout) clearTimeout(animationTimeout);
+    menu.style.animation = "none";
+    void menu.offsetWidth; // 触发回流
+}
 
-        document.getElementById('year').textContent = new Date().getFullYear();
+function openStartMenu() {
+    clearAnimations();
+    menu.style.display = 'block';
+    menu.style.animation = 'scaleIn 0.4s ease-in-out forwards';
+    button.classList.add('active');
+    startText.style.opacity = '0';
+    timeDisplay.style.opacity = '0';
+    isMenuOpen = true;
+}
 
-        function updateTime() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('timeDisplay').textContent = `${hours}:${minutes}:${seconds}`;
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
+function closeStartMenu() {
+    clearAnimations();
+    menu.style.animation = 'scaleOut 0.3s ease-in-out forwards';
+    button.classList.remove('active');
+    timeDisplay.style.opacity = '1';
+    animationTimeout = setTimeout(() => {
+        if (!isMenuOpen) menu.style.display = 'none';
+    }, 300);
+    isMenuOpen = false;
+}
 
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-              navigator.serviceWorker.register('service-worker.js')
-                .then((registration) => {
-                  console.log('Service Worker 注册成功:', registration);
-                })
-                .catch((error) => {
-                  console.log('Service Worker 注册失败:', error);
-                });
-            });
-        }
-    </script>
+function toggleStartMenu() {
+    if (isMenuOpen) closeStartMenu();
+    else openStartMenu();
+}
+
+// 点击按钮切换菜单
+button.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleStartMenu();
+});
+
+// 点击空白关闭
+window.addEventListener('click', (event) => {
+    if (isMenuOpen && !menu.contains(event.target) && !button.contains(event.target)) {
+        closeStartMenu();
+    }
+});
+
+// 按 Esc 键关闭菜单
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isMenuOpen) {
+        closeStartMenu();
+    }
+});
+
+// 时间显示
+function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2,'0');
+    const minutes = String(now.getMinutes()).padStart(2,'0');
+    const seconds = String(now.getSeconds()).padStart(2,'0');
+    timeDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
+
 
