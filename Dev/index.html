@@ -19,14 +19,13 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('index'); /* 确保图片路径正确 */
+            background-image: url('index');
             background-size: cover;
             background-position: center;
-            overflow: hidden; /* 禁止滚动条 */
+            overflow: hidden;
             position: relative;
         }
 
-        /* 头部标题动画 */
         header {
             padding: 20px 0;
             background-color: rgba(0, 0, 0, 0.1);
@@ -37,14 +36,8 @@
         }
 
         @keyframes slideIn {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         h1 {
@@ -54,7 +47,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* 点击开始后淡出文字 */
+        /* 点击开始文字 */
         .start-text {
             position: absolute;
             top: 50%;
@@ -68,43 +61,49 @@
             transition: opacity 1s ease;
         }
 
+        /* 时间显示 */
+        .time-display {
+            position: absolute;
+            top: 20%;  /* 比“点击开始”更高一些 */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 5em;
+            color: #ffffff;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+            z-index: 101;
+            transition: opacity 0.5s ease;
+        }
+
         /* 任务栏 */
         .taskbar {
-            background: rgba(255, 255, 255, 0.5); /* 半透明白色背景 */
+            background: rgba(255, 255, 255, 0.5);
             position: fixed;
             bottom: 0;
-            left: 50%; /* 确保任务栏居中 */
-            transform: translateX(-50%); /* 使任务栏居中 */
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
             height: 60px;
             display: flex;
-            justify-content: center; /* 水平居中 */
-            align-items: center; /* 垂直居中 */
+            justify-content: center;
+            align-items: center;
             padding: 0 20px;
-            z-index: 105; /* 将任务栏层级设置为高于开始菜单 */
+            z-index: 105;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px); /* 添加模糊效果 */
-            animation: riseUp 1s ease-out forwards; /* 添加升起动画 */
+            backdrop-filter: blur(10px);
+            animation: riseUp 1s ease-out forwards;
         }
 
         @keyframes riseUp {
-            from {
-                transform: translateY(100px) translateX(-50%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0) translateX(-50%);
-                opacity: 1;
-            }
+            from { transform: translateY(100px) translateX(-50%); opacity: 0; }
+            to { transform: translateY(0) translateX(-50%); opacity: 1; }
         }
 
-        /* 开始菜单按钮（圆角正方形） */
         .start-menu-button {
-            background: transparent; /* 默认背景色透明，与页面背景一致 */
+            background: transparent;
             border: none;
-            border-radius: 10px; /* 较小的圆角 */
-            width: 50px; /* 正方形按钮 */
-            height: 50px; /* 正方形按钮 */
+            border-radius: 10px;
+            width: 50px;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -113,88 +112,60 @@
             z-index: 106;
         }
 
-        /* 设置开始按钮内的图标大小 */
-        .start-menu-button img {
-            width: 25px;
-            height: 25px;
-        }
+        .start-menu-button img { width: 25px; height: 25px; }
 
-        /* 开始按钮在展开菜单时保持蓝色 */
-        .start-menu-button.active {
-            background: #0078D4; /* 蓝色 */
-        }
-
-        /* 开始按钮悬浮效果（深蓝色） */
+        .start-menu-button.active { background: #0078D4; }
         .start-menu-button:hover {
-            background: #005A8A; /* 悬浮时深蓝色 */
-            transform: scale(1.1); /* 鼠标悬停时放大 */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 增加阴影 */
+            background: #005A8A;
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
+        .start-menu-button:active { transform: scale(0.9); }
 
-        /* 开始按钮点击时的缩放效果 */
-        .start-menu-button:active {
-            transform: scale(0.9); /* 鼠标点击时缩小 */
-        }
-
-        /* 开始菜单 */
         .start-menu {
             position: fixed;
-            bottom: 80px; /* 改为距离任务栏80px */
+            bottom: 80px;
             left: 50%;
-            transform: translateX(-50%); /* 初始状态不使用 scale */
-            width: 80vw; /* 动态宽度为视口宽度的80% */
-            max-width: 600px; /* 最大宽度为600px */
-            height: calc(100vh - 180px); /* 减去头部和任务栏的高度 */
-            max-height: 70vh; /* 最大高度 */
+            transform: translateX(-50%);
+            width: 80vw;
+            max-width: 600px;
+            height: calc(100vh - 180px);
+            max-height: 70vh;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             padding: 20px;
             display: none;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            z-index: 104; /* 确保开始菜单的层级高于页脚 */
-            animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* 加速展开动画 */
+            z-index: 104;
+            animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             text-align: center;
             overflow-y: auto;
-            backdrop-filter: blur(10px); /* 添加模糊效果 */
-            transform-origin: bottom center; /* 从底部中央开始缩放 */
+            backdrop-filter: blur(10px);
+            transform-origin: bottom center;
         }
 
         @keyframes scaleIn {
-            from {
-                transform: translateY(80px) translateX(-50%) scale(0); /* 初始状态为向下偏移80px并缩小 */
-            }
-            to {
-                transform: translateY(0) translateX(-50%) scale(1); /* 完全展开且无偏移 */
-            }
+            from { transform: translateY(80px) translateX(-50%) scale(0); }
+            to { transform: translateY(0) translateX(-50%) scale(1); }
         }
 
-        /* 开始菜单移出动画（加速） */
         @keyframes scaleOut {
-            from {
-                transform: translateY(0) translateX(-50%) scale(1); /* 完全展开 */
-            }
-            to {
-                transform: translateY(80px) translateX(-50%) scale(0); /* 缩小并向下偏移80px */
-            }
+            from { transform: translateY(0) translateX(-50%) scale(1); }
+            to { transform: translateY(80px) translateX(-50%) scale(0); }
         }
 
-        .start-menu h3 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            color: #0078D4;
-        }
+        .start-menu h3 { font-size: 1.8em; margin-bottom: 15px; color: #0078D4; }
 
-        /* 按钮容器背景设置为模糊透明 */
         .start-menu ul {
             list-style: none;
             padding: 0;
-            background-color: rgba(255, 255, 255, 0.6); /* 设置背景为半透明白色 */
-            border-radius: 10px; /* 给容器添加圆角 */
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
             padding: 10px;
-            backdrop-filter: blur(10px); /* 模糊效果 */
-            display: grid; /* 使用网格布局 */
-            grid-template-columns: repeat(2, 1fr); /* 每行两个按钮 */
-            gap: 15px; /* 按钮之间的间隔 */
+            backdrop-filter: blur(10px);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
         }
 
         .start-menu ul li {
@@ -205,29 +176,17 @@
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
             display: flex;
-            align-items: center; /* 图标与文字垂直居中 */
-            justify-content: center; /* 图标和文本水平居中 */
+            align-items: center;
+            justify-content: center;
         }
 
-        .start-menu ul li img {
-            margin-right: 10px; /* 图标与文字之间的间距 */
-            width: 20px;
-            height: 20px;
-        }
-
-        .start-menu ul li:hover {
-            background: #fff; /* 背景色为白色 */
-            color: #0078D4; /* 文字颜色 */
-        }
-
-        /* 去除链接的下划线 */
-        .start-menu ul li a {
-            text-decoration: none; /* 去除文字下划线 */
-        }
+        .start-menu ul li img { margin-right: 10px; width: 20px; height: 20px; }
+        .start-menu ul li:hover { background: #fff; color: #0078D4; }
+        .start-menu ul li a { text-decoration: none; }
 
         .acrylic-button {
             padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.6); /* 半透明白色背景 */
+            background: rgba(255, 255, 255, 0.6);
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -239,116 +198,55 @@
             align-items: center;
             transition: all 0.3s ease;
         }
+        .acrylic-button:active { transform: scale(0.95); }
+        .acrylic-button:hover { background: #0078D4; color: #fff; }
 
-        .acrylic-button:active {
-            transform: scale(0.95); /* 点击时按钮缩小 */
-        }
-
-        .acrylic-button:hover {
-            background: #0078D4;
-            color: #fff; /* 鼠标悬停时颜色变化 */
-        }
-
-        /* 搜索框容器 */
-        .search-container {
-            display: flex;
-            align-items: center; /* 水平居中对齐 */
-            justify-content: center; /* 水平居中 */
-            width: 100%;
-        }
-
+        .search-container { display: flex; align-items: center; justify-content: center; width: 100%; }
         .search-bar {
-            width: 70%;
-            max-width: 250px;
-            padding: 10px;
-            font-size: 1em;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            width: 70%; max-width: 250px; padding: 10px; font-size: 1em;
+            border-radius: 5px; border: 1px solid #ccc;
         }
-
         .search-button {
-            padding: 10px 20px;
-            background: #0078D4;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px; /* 按钮与输入框之间的间隔 */
+            padding: 10px 20px; background: #0078D4; color: #fff;
+            border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;
         }
+        .search-button:hover { background: #005A8A; }
 
-        .search-button:hover {
-            background: #005A8A;
-        }
-
-        /* 页脚 */
         #footer {
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            background: transparent;
-            color: #2F4F4F;
-            font-family: Arial;
-            font-size: 12px;
-            letter-spacing: 1px;
-            position: fixed;
-            bottom: 60px;
-            width: 100%;
-            z-index: 100;
+            height: 40px; line-height: 40px; text-align: center; background: transparent;
+            color: #2F4F4F; font-family: Arial; font-size: 12px; letter-spacing: 1px;
+            position: fixed; bottom: 60px; width: 100%; z-index: 100;
         }
 
-        /* 移动设备优化 */
         @media (max-width: 768px) {
-            .start-menu {
-                width: 90%;
-            }
-
-            .start-menu-button {
-                width: 45px;
-                height: 45px;
-            }
-
-            .start-menu-button img {
-                width: 20px;
-                height: 20px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .acrylic-button {
-                padding: 8px 15px;
-                font-size: 1em;
-            }
-
-            .search-bar {
-                width: 80%;
-            }
+            .start-menu { width: 90%; }
+            .start-menu-button { width: 45px; height: 45px; }
+            .start-menu-button img { width: 20px; height: 20px; }
+            h1 { font-size: 2em; }
+            .acrylic-button { padding: 8px 15px; font-size: 1em; }
+            .search-bar { width: 80%; }
         }
 
-        /* 在触摸屏设备上增加按动缩放效果 */
         @media (hover: none) and (pointer: coarse) {
-            .start-menu-button:active {
-                transform: scale(0.9);
-            }
+            .start-menu-button:active { transform: scale(0.9); }
         }
     </style>
 
-<link rel="manifest" href="manifest.json">
-
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <header>
         <h1>IVBX Server</h1>
     </header>
 
+    <div class="time-display" id="timeDisplay"></div>
     <div class="start-text" id="startText">单击按钮开始</div>
 
     <div class="start-menu" id="startMenu">
         <h3>开始</h3>
         <form action="https://www.bing.com/search" method="get">
             <div class="search-container">
-                <input type="text" name="q" class="search-bar" placeholder="请输入搜索内容..." />
+                <input type="text" name="q" class="search-bar" placeholder="键入并搜索内容..." />
                 <button type="submit" class="search-button">搜索</button>
             </div>
         </form>
@@ -373,17 +271,18 @@
             var menu = document.getElementById('startMenu');
             var button = document.querySelector('.start-menu-button');
             var startText = document.getElementById('startText');
+            var timeDisplay = document.getElementById('timeDisplay');
             if (menu.style.display === 'none' || menu.style.display === '') {
                 menu.style.display = 'block';
                 menu.style.animation = 'scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
                 button.classList.add('active');
                 startText.style.opacity = '0'; 
+                timeDisplay.style.opacity = '0';
             } else {
                 menu.style.animation = 'scaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-                setTimeout(function() {
-                    menu.style.display = 'none';
-                }, 300);
+                setTimeout(function() { menu.style.display = 'none'; }, 300);
                 button.classList.remove('active');
+                timeDisplay.style.opacity = '1';
             }
         }
 
@@ -391,38 +290,38 @@
             var menu = document.getElementById('startMenu');
             var button = document.querySelector('.start-menu-button');
             var startText = document.getElementById('startText');
+            var timeDisplay = document.getElementById('timeDisplay');
             if (!menu.contains(event.target) && !button.contains(event.target)) {
                 menu.style.animation = 'scaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-                setTimeout(function() {
-                    menu.style.display = 'none';
-                }, 300);
+                setTimeout(function() { menu.style.display = 'none'; }, 300);
                 button.classList.remove('active');
+                timeDisplay.style.opacity = '1';
             }
         });
 
         document.getElementById('year').textContent = new Date().getFullYear();
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
-        .then((registration) => {
-          console.log('Service Worker 注册成功:', registration);
-        })
-        .catch((error) => {
-          console.log('Service Worker 注册失败:', error);
-        });
-    });
-  }
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('timeDisplay').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+              navigator.serviceWorker.register('service-worker.js')
+                .then((registration) => {
+                  console.log('Service Worker 注册成功:', registration);
+                })
+                .catch((error) => {
+                  console.log('Service Worker 注册失败:', error);
+                });
+            });
+        }
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
