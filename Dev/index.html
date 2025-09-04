@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="stylesheet" type="text/css" href="index.css">
     <title>IVBX Server</title>
-
-    <!-- 添加网站图标 -->
     <link rel="icon" href="icon.ico" type="image/x-icon">
 
     <style type="text/css">
-        /* 禁止滚动条 */
         body {
             display: flex;
             flex-direction: column;
@@ -47,7 +44,6 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* 点击开始文字 */
         .start-text {
             position: absolute;
             top: 50%;
@@ -61,20 +57,19 @@
             transition: opacity 1s ease;
         }
 
-        /* 时间显示 */
+        /* 时间显示更大，位置更高 */
         .time-display {
             position: absolute;
-            top: 20%;  /* 比“点击开始”更高一些 */
+            top: 20%;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 5em;
+            font-size: 4em;
             color: #ffffff;
             text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
             z-index: 101;
             transition: opacity 0.5s ease;
         }
 
-        /* 任务栏 */
         .taskbar {
             background: rgba(255, 255, 255, 0.5);
             position: fixed;
@@ -122,6 +117,7 @@
         }
         .start-menu-button:active { transform: scale(0.9); }
 
+        /* 开始菜单 + 非线性展开动画 */
         .start-menu {
             position: fixed;
             bottom: 80px;
@@ -137,7 +133,7 @@
             display: none;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             z-index: 104;
-            animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: scaleIn 0.4s ease-in-out forwards; /* 改为非线性 */
             text-align: center;
             overflow-y: auto;
             backdrop-filter: blur(10px);
@@ -240,7 +236,7 @@
     </header>
 
     <div class="time-display" id="timeDisplay"></div>
-    <div class="start-text" id="startText">单击按钮开始</div>
+    <div class="start-text" id="startText">点击开始</div>
 
     <div class="start-menu" id="startMenu">
         <h3>开始</h3>
@@ -274,12 +270,12 @@
             var timeDisplay = document.getElementById('timeDisplay');
             if (menu.style.display === 'none' || menu.style.display === '') {
                 menu.style.display = 'block';
-                menu.style.animation = 'scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                menu.style.animation = 'scaleIn 0.4s ease-in-out';
                 button.classList.add('active');
                 startText.style.opacity = '0'; 
                 timeDisplay.style.opacity = '0';
             } else {
-                menu.style.animation = 'scaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                menu.style.animation = 'scaleOut 0.3s ease-in-out';
                 setTimeout(function() { menu.style.display = 'none'; }, 300);
                 button.classList.remove('active');
                 timeDisplay.style.opacity = '1';
@@ -292,7 +288,7 @@
             var startText = document.getElementById('startText');
             var timeDisplay = document.getElementById('timeDisplay');
             if (!menu.contains(event.target) && !button.contains(event.target)) {
-                menu.style.animation = 'scaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                menu.style.animation = 'scaleOut 0.3s ease-in-out';
                 setTimeout(function() { menu.style.display = 'none'; }, 300);
                 button.classList.remove('active');
                 timeDisplay.style.opacity = '1';
