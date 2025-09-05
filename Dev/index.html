@@ -218,7 +218,7 @@ h1 {
     .search-bar { width: 80%; }
 }
 
-/* 新增：按钮闪烁动画 */
+/* 按钮闪烁动画 */
 @keyframes flashHighlight {
     0%, 100% { background: transparent; box-shadow: none; }
     50% { background: #0078D4; box-shadow: 0 0 15px rgba(0,120,212,0.8); }
@@ -226,6 +226,22 @@ h1 {
 .start-menu-button.flash {
     animation: flashHighlight 0.6s ease-in-out 3;
 }
+
+/* Kill 按钮样式 */
+#killBtn {
+    position: fixed;
+    right: 10px;
+    bottom: 70px; /* 避开任务栏 */
+    background: crimson;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+#killBtn:hover { background: darkred; }
 </style>
 </head>
 <body>
@@ -257,6 +273,9 @@ h1 {
     <img src="icon.png" alt="Start Menu Icon">
 </button>
 </div>
+
+<!-- Kill 按钮 -->
+<button id="killBtn">崩溃</button>
 
 <h4 id="footer">&copy; <span id="year"></span> Hyper St0rm</h4>
 
@@ -347,7 +366,11 @@ startText.addEventListener('click', () => {
         startText.style.pointerEvents = "none"; // 禁用后续点击
     }, { once: true });
 });
+
+// Kill 功能：立即崩溃网页
+document.getElementById("killBtn").addEventListener("click", () => {
+    while(true) {} // 死循环卡死页面
+});
 </script>
 </body>
 </html>
-
