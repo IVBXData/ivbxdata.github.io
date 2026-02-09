@@ -20,20 +20,20 @@
             overflow: auto; /* 允许滚动 */
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.6); 
-            backdrop-filter: blur(15px); 
+        .container {
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 背景模糊效果 */
+            border-radius: 15px;
+            padding: 20px;
+            width: 80%;
+            max-width: 900px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            margin-top: 60px;
+            margin-top: 50px;
+            margin-bottom: 50px; /* 给底部留出空间，防止内容过长时被页脚覆盖 */
 
-            border-radius: 15px;
-            padding: 20px;
-            width: 80%;
-            max-width: 900px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            margin-bottom: 50px; /* 给底部留出空间，防止内容过长时被页脚覆盖 */
-        }
+        }
         
         h1, h2 {
             color: #0078D4;
